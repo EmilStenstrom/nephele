@@ -1,35 +1,25 @@
 h1. What movies on Piratebay will you like the most?
 
-This script scrapes the most downloaded, high resolution, movies from the Piratebay, and checks the what grade you would give them at Filmtipset (Swedish movie recommendation service).
+This script scrapes the most downloaded, high resolution, movies from the "Piratebay":http://thepiratebay.org, and checks the what grade you would give them at "Filmtipset":http://filmtipset.se (Swedish movie recommendation service).
+
+Example output:
 
 bc. Movies not seen, by grade
-bc. -------------------------
-bc. 5  The Art of Flight  http://www.filmtipset.se/film/art-of-flight.html
-bc. 5  Niceville          http://www.filmtipset.se/film/the-help.html
-bc. 4  Warrior            http://www.filmtipset.se/film/warrior.html
-bc. 4  Tropa de Elite     http://www.filmtipset.se/film/tropa-de-elite.html
-bc. 4  Trassel            http://www.filmtipset.se/film/trassel.html
-bc. ...
+-------------------------
+5  The Art of Flight  http://www.filmtipset.se/film/art-of-flight.html
+5  Niceville          http://www.filmtipset.se/film/the-help.html
+4  Warrior            http://www.filmtipset.se/film/warrior.html
+4  Tropa de Elite     http://www.filmtipset.se/film/tropa-de-elite.html
+4  Trassel            http://www.filmtipset.se/film/trassel.html
+...
 
 You want to use another serivce? Fork and add your own. I would love to have pluggable backends, but I don't have the time. If you build it, and the code is good, I'll accept the pull request.
 
 h2. How to get this running
 
-1. *Rename `access_key.py.sample` to `access_key.py`*
-
-2. *Add a proper access key and user id* in access_key.py.
-
-Get your access key by following the instructions on "Filmtipset's API page":http://nyheter24.se/filmtipset/api.cgi, and get your user id by "searching for your username":http://nyheter24.se/filmtipset/search_member.cgi and mouseover your nick, the member parameter is your user id.
-
-With those two changes, all requests are identified as your own (so I don't get the blame if you spam the API), and all grades will be based on your own accout.
-
-3. Start a terminal, navigate to parse.py and type:
-
-bc. python parse.py
-
-or
-
-bc. python parse.py --verbose
+# *Rename <code>access_key.py.sample</code>* to <code>access_key.py</code>
+# Add a proper *access key* and *user id* in access_key.py. Get your access key by following the instructions on "Filmtipset's API page":http://nyheter24.se/filmtipset/api.cgi, and get your user id by "searching for your username":http://nyheter24.se/filmtipset/search_member.cgi and mouseover your nick, the member parameter is your user id. With those two changes, all requests are identified as your own (so I don't get the blame if you spam the API), and all grades will be based on your own accout.
+# Start a terminal, navigate to parse.py and type: <code>python parse.py</code>
 
 h2. License (MIT)
 
