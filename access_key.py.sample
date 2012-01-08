@@ -1,0 +1,5 @@
+# Your access key for Filmtipset here, used to identify your application
+ACCESS_KEY = ""
+
+# Your user id for Filmtipset here, used to get your own grades
+USER_KEY = 0
