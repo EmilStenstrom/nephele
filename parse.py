@@ -142,17 +142,25 @@ def debug(message):
         print(message)
 
 def out(header, collection):
-    if collection:
-        print(header)
-        print("-"*len(header))
-        if isinstance(collection[0], tuple):
-            max_len = len(max(collection, key=lambda x: len(x[2]))[2])
-            for item in collection:
-                print("%-2s" % item[0], ("%-" + str(max_len + 1) + "s") % item[2], item[3])
-        else:
-            for item in collection:
-                print(item)
-        print()
+    if not collection:
+        return
+
+    print(header)
+    print("-"*len(header))
+    if isinstance(collection[0], tuple):
+        max_len = len(max(collection, key=lambda x: len(x[2]))[2])
+        for item in collection:
+            num = "%-2s" % item[0]
+            name = ("%-" + str(max_len + 1) + "s") % item[2]
+            link = item[3]
+            try:
+                print(num, name, link)
+            except UnicodeEncodeError:
+                print(num, name.encode("latin-1", link))
+    else:
+        for item in collection:
+            print(item)
+    print()
 
 def main():
     movies = unique([strip_title(title) for url, title in get_movies(stop=10)])
