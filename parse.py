@@ -30,7 +30,7 @@ def cached_request(url, type, cache_age_days=1):
             content = f.read()
     else:
         debug("WEB: %s" % url)
-        r = requests.get(url)
+        r = requests.get(url, timeout=5)
         if type == "json":
             content = json.dumps(json.loads(unicode(r.content, "iso-8859-15")), indent=4)
         else:
