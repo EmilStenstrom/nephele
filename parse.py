@@ -148,7 +148,7 @@ def out(header, collection):
     print(header)
     print("-"*len(header))
     if isinstance(collection[0], tuple):
-        max_len = len(max(collection, key=lambda x: len(x[2]))[2])
+        max_len = min(60, len(max(collection, key=lambda x: len(x[2]))[2]))
         for item in collection:
             num = "%-2s" % item[0]
             name = ("%-" + str(max_len + 1) + "s") % item[2]
