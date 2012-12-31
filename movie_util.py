@@ -7,9 +7,9 @@ def movie_title_from_filename(title):
     ends = [
         "1080p", "720p", "bluray", "bdrip", "brrip", "blu-ray", "hd", "hdtv",
         "korsub", "extended", "uncut", "unrated", "repack", "r3",
-        "swesub", "ac3", "hdrip", "xvid", "dvdscr", "rc", "dvdrip", "dvdr",
+        "swesub", "ac3", "xvid", "hdrip", "dvdscr", "rc", "dvdrip", "dvdr",
         "hq", "boxset", "x264", "tc", "bdrip720p", "bdrip1080p",
-        "edition", "limited", "french", "pal",
+        "edition", "limited", "french", "nlsubs", "pal",
         "mkv", "avi", "iso", "mp4",
     ]
 
