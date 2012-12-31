@@ -4,11 +4,12 @@ import re
 def movie_title_from_filename(title):
     # Strings that mark the end of a movie name, and start of meta data
     ends = [
-        "1080p", "720p", "bluray", "bdrip", "brrip", "hd",
-        "korsub", "extended", "uncut", "unrated", "repack",
-        "swesub", "ac3", "hdrip", "xvid", "dvdscr", "rc",
+        "1080p", "720p", "bluray", "bdrip", "brrip", "blu-ray", "hd", "hdtv",
+        "korsub", "extended", "uncut", "unrated", "repack", "r3",
+        "swesub", "ac3", "hdrip", "xvid", "dvdscr", "rc", "dvdrip", "dvdr",
         "hq", "boxset", "x264", "tc", "bdrip720p", "bdrip1080p",
-        "edition"
+        "edition", "limited", "french", "pal",
+        "mkv", "avi", "iso", "mp4",
     ]
 
     # Remove all non-alpha characters
