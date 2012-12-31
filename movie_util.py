@@ -48,4 +48,4 @@ def separate_movies_from_bundles(mixed):
     return movies, bundles
 
 def filenames_to_search_strings(names):
-    return remove_years([movie_title_from_filename(title) for url, title in names])
+    return remove_years([movie_title_from_filename(title) for title in names])

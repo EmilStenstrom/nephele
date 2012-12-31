@@ -52,7 +52,7 @@ def get_movies(start=0, stop=1):
         content = cached_request("http://thepiratebay.se/browse/207/%s/7" % i, "html")
         document = html.document_fromstring(content)
         links = document.cssselect(".detLink")
-        movies.extend([(link.get("href"), link.text_content()) for link in links])
+        movies.extend([link.text_content() for link in links])
     if not DEBUG:
         print()
     print()
