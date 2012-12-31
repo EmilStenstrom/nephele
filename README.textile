@@ -1,6 +1,6 @@
 h1. Which movies will you like the most?
 
-This script scrapes the most downloaded, high resolution, movies from the "Piratebay":http://thepiratebay.org, and checks the what grade you would give them at "Filmtipset":http://filmtipset.se (Swedish movie recommendation service). You can also start with a directory of files, and look them up on Filmtipset.
+This script scrapes the most downloaded, high resolution, movies from the "Piratebay":http://thepiratebay.se, and checks what grade you would give them at "Filmtipset":http://filmtipset.se (Swedish movie recommendation service). It can also look up grades from a local directory of movie files.
 
 Example output:
 
@@ -20,12 +20,12 @@ h2. Specify Access key and Filmtipset user ID
 # *Rename <code>access_key.py.sample</code>* to <code>access_key.py</code>
 # Add a proper *access key* and *user id* in access_key.py. Get your access key by following the instructions on "Filmtipset's API page":http://nyheter24.se/filmtipset/api.cgi, and get your user id by "searching for your username":http://nyheter24.se/filmtipset/search_member.cgi and mouseover your nick, the member parameter is your user id. With those two changes, all requests are identified as your own (so I don't get the blame if you spam the API), and all grades will be based on your own accout.
 
-h2. How to fetch the most popular moview from Piratebay
+h2. How to lookup the most popular high-resolution movies from Piratebay
 
 # Start a terminal, navigate to get_from_piratebay.py and type: <code>python get_from_piratebay.py</code>
 # You can also customize the number of pages of results that should be fetched from Piratebay. Just add the number of pages as a command line parameter: <code>python get_from_piratebay.py 5</code>
 
-h2. How to lookup the grades from some local filenames
+h2. How to lookup from a local directory of movies
 
 # Start a terminal, navigate to lookup_filesystem.py and type: <code>python lookup_filesystem.py [local directory]</code>
 
