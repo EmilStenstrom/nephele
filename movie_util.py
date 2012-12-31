@@ -1,3 +1,4 @@
+from __future__ import print_function
 import re
 
 # Cut out the movie name from a torrent name
@@ -50,3 +51,16 @@ def separate_movies_from_bundles(mixed):
 
 def filenames_to_search_strings(names):
     return remove_years([movie_title_from_filename(title) for title in names])
+
+def print_movies(heading, movie_list):
+    if movie_list:
+        print(heading)
+        print("-" * len(heading))
+        if isinstance(movie_list[0], tuple):
+            max_len = len(max(movie_list, key=lambda x: len(x[2]))[2])
+            for item in movie_list:
+                print("%-2s" % item[0], ("%-" + str(max_len + 1) + "s") % item[2], item[3])
+        else:
+            for item in movie_list:
+                print(item)
+        print()
