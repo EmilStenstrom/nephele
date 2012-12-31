@@ -1,6 +1,6 @@
-h1. What movies on Piratebay will you like the most?
+h1. Which movies will you like the most?
 
-This script scrapes the most downloaded, high resolution, movies from the "Piratebay":http://thepiratebay.org, and checks the what grade you would give them at "Filmtipset":http://filmtipset.se (Swedish movie recommendation service).
+This script scrapes the most downloaded, high resolution, movies from the "Piratebay":http://thepiratebay.org, and checks the what grade you would give them at "Filmtipset":http://filmtipset.se (Swedish movie recommendation service). You can also start with a directory of files, and look them up on Filmtipset.
 
 Example output:
 
@@ -15,11 +15,19 @@ bc. Movies not seen, by grade
 
 You want to use another serivce? Fork and add your own. I would love to have pluggable backends, but I don't have the time. If you build it, and the code is good, I'll accept the pull request.
 
-h2. How to get this running
+h2. Specify Access key and Filmtipset user ID
 
 # *Rename <code>access_key.py.sample</code>* to <code>access_key.py</code>
 # Add a proper *access key* and *user id* in access_key.py. Get your access key by following the instructions on "Filmtipset's API page":http://nyheter24.se/filmtipset/api.cgi, and get your user id by "searching for your username":http://nyheter24.se/filmtipset/search_member.cgi and mouseover your nick, the member parameter is your user id. With those two changes, all requests are identified as your own (so I don't get the blame if you spam the API), and all grades will be based on your own accout.
-# Start a terminal, navigate to parse.py and type: <code>python parse.py</code>
+
+h2. How to fetch the most popular moview from Piratebay
+
+# Start a terminal, navigate to get_from_piratebay.py and type: <code>python get_from_piratebay.py</code>
+# You can also customize the number of pages of results that should be fetched from Piratebay. Just add the number of pages as a command line parameter: <code>python get_from_piratebay.py 5</code>
+
+h2. How to lookup the grades from some local filenames
+
+# Start a terminal, navigate to lookup_filesystem.py and type: <code>python lookup_filesystem.py [local directory]</code>
 
 h2. License (MIT)
 
