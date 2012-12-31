@@ -1,0 +1,3 @@
+requests==0.14.2
+lxml==3.1beta1
+cssselect==0.7.1
