@@ -1,7 +1,7 @@
 import re
 
 # Cut out the movie name from a torrent name
-def strip_title(title):
+def movie_title_from_filename(title):
     # Strings that mark the end of a movie name, and start of meta data
     ends = [
         "1080p", "720p", "bluray", "bdrip", "brrip", "hd",
@@ -25,7 +25,7 @@ def strip_title(title):
     return title.strip()
 
 # Reduce the number of duplicate movies by removing the year from name
-def unique(movies):
+def remove_years(movies):
     return set([("".join(re.split(" \d{4}$", title)).strip()) for title in movies])
 
 # Identify bundles of movies, as opposed to a single movie
@@ -48,4 +48,4 @@ def separate_movies_from_bundles(mixed):
     return movies, bundles
 
 def filenames_to_search_strings(names):
-    return unique([strip_title(title) for url, title in names])
+    return remove_years([movie_title_from_filename(title) for url, title in names])
