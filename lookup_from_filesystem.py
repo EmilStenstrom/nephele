@@ -8,7 +8,7 @@ def is_proper_movie_file(filename):
     FILE_ENDINGS = [".mkv", ".mp4", ".avi", ".iso", ".mov", "mpeg"]  # Note: needs to be length 4
     if filename[-4:] in FILE_ENDINGS:
         return True
-    elif (filename.find(".") == -1 and not filename.endswith("-ignore")):
+    elif not filename.endswith("-ignore") and not filename.startswith("."):
         return True
     return False
 
