@@ -29,7 +29,7 @@ def is_bundle(title):
     bundle_identifier = [
         "trilogy", "duology", "quadrilogy",
         "movies", "collection", "series", "complete",
-        " 1 3 ", " 1 4 ", " 1 5 "
+        " 1 3 ", " 1 4 ", " 1 5 ", " 1 2 3 "
     ]
     for identifier in bundle_identifier:
         if identifier in title:
