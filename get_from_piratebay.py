@@ -30,10 +30,6 @@ def main(pages=10, debug=False):
     print_movies("Movies not seen, by grade", sorted(filter(lambda x: x[1] != u'seen', graded), reverse=True))
     print_movies("Bundles, not graded", sorted(bundles))
 
-# Possible calls:
-# get_from_piratebay --verbose
-# get_from_piratebay 10
-# get_from_piratebay --verbose 10
 if __name__ == "__main__":
     debug = False  # Can be set with "get_from_piratebay.py --verbose"
     pages = 10  # Can be set with "get_from_piratebay.py 5"
