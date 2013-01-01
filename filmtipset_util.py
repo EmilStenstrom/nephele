@@ -23,8 +23,9 @@ def get_first(title, debug=False):
     results = search(title, debug=debug)
     movie = results[0]["data"][0]["hits"][0]["movie"]
     return {
-        "grade": movie["grade"]["value"] or "-",
-        "commongrade": movie["filmtipsetgrade"]["value"] or "-",
+        "grade": movie["grade"]["value"] or 0,
+        "commongrade": movie["filmtipsetgrade"]["value"] or 0,
+        "commongrade_count": movie["filmtipsetgrade"]["count"] if "count" in movie["filmtipsetgrade"] else 0,
         "type": movie["grade"]["type"],
         "name": movie["name"].strip(),
         "url": movie["url"].strip(),
