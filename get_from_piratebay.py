@@ -27,7 +27,7 @@ def main(pages=10, debug=False):
     movies, bundles = separate_movies_from_bundles(movies)
     graded = get_grades(movies, debug=debug)
 
-    print_movies("Movies not seen, by grade", sorted(filter(lambda x: x[1] != u'seen', graded), reverse=True))
+    print_movies("Movies not seen, by your grade (and Filmtipset grade)", sorted(filter(lambda x: x["type"] != u'seen', graded), reverse=True))
     print_movies("Bundles, not graded", sorted(bundles))
 
 if __name__ == "__main__":

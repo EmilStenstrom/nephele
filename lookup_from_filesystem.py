@@ -23,8 +23,8 @@ def main(directory, debug=False):
     movies = filenames_to_search_strings(movies)
     graded = get_grades(movies, debug=debug)
 
-    print_movies("Movies seen, by grade", sorted(filter(lambda x: x[1] == u'seen', graded), reverse=True))
-    print_movies("Movies not seen, by grade", sorted(filter(lambda x: x[1] != u'seen', graded), reverse=True))
+    print_movies("Movies seen, by your grade (and Filmtipset grade)", filter(lambda x: x["type"] == u'seen', graded))
+    print_movies("Movies not seen, by your grade (and Filmtipset grade)", filter(lambda x: x["type"] != u'seen', graded))
 
 # Possible calls:
 # lookup_from_filesystem.py /My-Movies/

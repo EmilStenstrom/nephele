@@ -22,11 +22,13 @@ def search(title, debug=False):
 def get_first(title, debug=False):
     results = search(title, debug=debug)
     movie = results[0]["data"][0]["hits"][0]["movie"]
-    grade = movie["grade"]["value"] or "-"
-    type = movie["grade"]["type"]
-    name = movie["name"].strip()
-    url = movie["url"].strip()
-    return (grade, type, name, url)
+    return {
+        "grade": movie["grade"]["value"] or "-",
+        "commongrade": movie["filmtipsetgrade"]["value"] or "-",
+        "type": movie["grade"]["type"],
+        "name": movie["name"].strip(),
+        "url": movie["url"].strip(),
+    }
 
 def get_grades(movies, debug=False):
     grades = []
@@ -38,4 +40,4 @@ def get_grades(movies, debug=False):
     if not debug:
         print()
     print()
-    return set(grades)
+    return grades

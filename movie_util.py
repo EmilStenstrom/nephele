@@ -49,11 +49,16 @@ def print_movies(heading, movie_list):
     if movie_list:
         print(heading)
         print("-" * len(heading))
-        if isinstance(movie_list[0], tuple):
-            max_len = len(max(movie_list, key=lambda x: len(x[2]))[2])
-            for item in movie_list:
-                print("%-2s" % item[0], ("%-" + str(max_len + 1) + "s") % item[2], item[3])
+        if isinstance(movie_list[0], dict):
+            movie_list = sorted(movie_list, key=lambda movie: (movie["grade"], movie["commongrade"]), reverse=True)
+            max_len = max(map(lambda x: len(x["name"]), movie_list))
+            for movie in movie_list:
+                print(
+                    "%s (%s)" % (movie["grade"], movie["commongrade"]),
+                    ("%-" + str(max_len + 1) + "s") % movie["name"],
+                    movie["url"]
+                )
         else:
-            for item in movie_list:
-                print(item)
+            for movie in movie_list:
+                print(movie)
         print()
