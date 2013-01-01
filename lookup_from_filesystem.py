@@ -5,7 +5,7 @@ from movie_util import filenames_to_search_strings, print_movies
 from filmtipset_util import get_grades
 
 def is_proper_movie_file(filename):
-    FILE_ENDINGS = [".mkv", ".mp4", ".avi", ".iso", "mpeg", ]
+    FILE_ENDINGS = [".mkv", ".mp4", ".avi", ".iso", ".mov", "mpeg"]  # Note: needs to be length 4
     if filename[-4:] in FILE_ENDINGS:
         return True
     elif (filename.find(".") == -1 and not filename.endswith("-ignore")):
