@@ -12,7 +12,7 @@ def get_movies(start=0, stop=1, debug=False):
     for i in range(start, stop):
         if not debug:
             print(".", end="")
-        content = cached_request("http://thepiratebay.se/browse/207/%s/7" % i, "html")
+        content = cached_request("http://thepiratebay.se/browse/207/%s/7" % i, "html", debug=debug)
         document = html.document_fromstring(content)
         links = document.cssselect(".detLink")
         movies.extend([link.text_content() for link in links])
@@ -25,7 +25,7 @@ def main(pages=10, debug=False):
     movies = get_movies(stop=pages, debug=debug)
     movies = filenames_to_search_strings(movies)
     movies, bundles = separate_movies_from_bundles(movies)
-    graded = get_grades(movies)
+    graded = get_grades(movies, debug=debug)
 
     print_movies("Movies not seen, by grade", sorted(filter(lambda x: x[1] != u'seen', graded), reverse=True))
     print_movies("Bundles, not graded", sorted(bundles))
