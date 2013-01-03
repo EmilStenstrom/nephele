@@ -6,11 +6,18 @@ from filmtipset_util import get_grades
 
 def is_proper_movie_file(filename):
     FILE_ENDINGS = [".mkv", ".mp4", ".avi", ".iso", ".mov", "mpeg"]  # Note: needs to be length 4
+    # Proper filenames
     if filename[-4:] in FILE_ENDINGS:
         return True
-    elif not filename.endswith("-ignore") and not filename.startswith("."):
-        return True
-    return False
+    # Not other filenames, or files starting with .
+    elif filename[-4] == "." or filename.startswith("."):
+        return False
+    # Not stuff that ends with "-ignore"
+    elif filename.endswith("-ignore"):
+        return False
+
+    # Only directories left
+    return True
 
 def get_movies(dir):
     movies = os.listdir(dir)
