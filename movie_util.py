@@ -5,13 +5,14 @@ import re
 def movie_title_from_filename(title):
     # Strings that mark the end of a movie name, and start of meta data
     ends = ["1280p", "1080p", "720p", "bluray", "bdrip", "brrip", "blu-ray", "blu", "bd", "hd", "hdtv", "korsub", "extended", "uncut", "unrated", "repack", "r3", "swesub", "ac3", "xvid", "hdrip", "dvdscr", "rc", "dvdrip", "dvdr", "rerip", "proper", "hq", "directors", "retail", "boxset", "x264", "tc", "bdrip720p", "bdrip1080p", "edition", "limited", "french", "swedish", "hindi", "kor", "nlsubs", "pal", "mkv", "avi", "iso", "mp4", "mpeg", "mov"]
+    endsi = ["iNTERNAL"]  # Case sensitive strings
 
     # Remove all non-alpha characters
-    words = re.split(r"[\W_]+", title.lower())
+    words = re.split(r"[\W_]+", title)
 
     # Loop over all words. As soon as a ending is found, cut to there
     for i, word in enumerate(words):
-        if word in ends:
+        if word.lower() in ends or word in endsi:
             words = words[:i]
             break
     title = " ".join(words).lower()
