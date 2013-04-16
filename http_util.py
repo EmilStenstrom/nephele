@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import hashlib
 import requests
@@ -24,13 +25,19 @@ def cached_request(url, type, cache_age_days=1, debug=False):
     else:
         if debug:
             print("WEB: %s" % url)
-        r = requests.get(url, timeout=5)
+        r = requests.get(url, timeout=10)
+        r.encoding = "utf-8"
         if type == "json":
             content = json.dumps(json.loads(unicode(r.content, "iso-8859-15")), indent=4)
         else:
             content = r.content
-        with codecs.open(cache_path, "w", "utf-8") as f:
-            f.write(content)
+        try:
+            with codecs.open(cache_path, "w", "utf-8") as f:
+                f.write(content)
+        except UnicodeDecodeError:
+            os.remove(cache_path)
+            print("Failed reading url because of encoding error: %s" % url, end="")
+
         # Use a delay to prevent DoS
         sleep(0.5)
     return content
