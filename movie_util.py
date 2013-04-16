@@ -58,7 +58,10 @@ def print_movies(heading, movie_list):
                 common = movie["commongrade"] or "-"
                 name = movie["name"]
                 url = movie["url"]
-                print(("%s (%s) %-" + str(max_len + 1) + "s %s") % (grade, common, name, url))
+                try:
+                    print(("%s (%s) %-" + str(max_len + 1) + "s %s") % (grade, common, name, url))
+                except UnicodeEncodeError:
+                    print(("%s (%s) %-" + str(max_len + 1) + "s %s") % (grade, common, repr(name), url))
         else:
             for movie in movie_list:
                 print(movie)
