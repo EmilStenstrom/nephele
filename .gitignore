@@ -1,3 +1,5 @@
 *.pyc
 access_key.py
 cache/
+/filmtipset-piratebay.sublime-project
+/filmtipset-piratebay.sublime-workspace
