@@ -7,6 +7,8 @@ from datetime import datetime
 import codecs
 from time import sleep
 
+requests.adapters.DEFAULT_RETRIES = 3
+
 # Fetch an URL and cache the response cache_age_days
 def cached_request(url, type, cache_age_days=1, debug=False):
     BASE_PATH = "cache"
