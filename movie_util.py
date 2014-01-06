@@ -72,6 +72,7 @@ def print_movies(heading, movie_list):
 
                 print((u" %s %-" + unicode(max_len + 1) + u"s %s (%s)") % (grade, name, url, commongrade))
         else:
+            # Bundles are printed as single strings
             for movie in movie_list:
                 print(movie)
         print()
