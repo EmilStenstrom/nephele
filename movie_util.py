@@ -59,13 +59,18 @@ def print_movies(heading, movie_list):
             max_len = max(map(lambda x: len(x["name"]), movie_list))
             for movie in movie_list:
                 grade = movie["grade"] or "-"
-                common = movie["commongrade"] or "-"
+                commongrade = movie["commongrade"] or "-"
                 name = movie["name"]
                 url = movie["url"]
+
+                # If we can't print to your console, remove characters until we can
+                enc = sys.stdout.encoding
                 try:
-                    print(("%s (%s) %-" + str(max_len + 1) + "s %s") % (grade, common, name, url))
+                    name.encode(enc)
                 except UnicodeEncodeError:
-                    print(("%s (%s) %-" + str(max_len + 1) + "s %s") % (grade, common, repr(name), url))
+                    name = name.encode("ascii", "replace")
+
+                print((u" %s %-" + unicode(max_len + 1) + u"s %s (%s)") % (grade, name, url, commongrade))
         else:
             for movie in movie_list:
                 print(movie)
