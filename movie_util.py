@@ -55,8 +55,9 @@ def print_movies(heading, movie_list):
         print(heading)
         print("-" * len(heading))
         if isinstance(movie_list[0], dict):
-            movie_list = sorted(movie_list, key=lambda m: (int(m["grade"]), int(m["commongrade"]), int(m["commongrade_count"])), reverse=True)
             max_len = max(map(lambda x: len(x["name"]), movie_list))
+            movie_list = sorted(movie_list, key=lambda m: (int(m["grade"]), int(m["commongrade"]), int(m["commongrade_count"])), reverse=True)
+
             for movie in movie_list:
                 grade = movie["grade"] or "-"
                 commongrade = movie["commongrade"] or "-"
