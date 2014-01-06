@@ -47,8 +47,23 @@ def separate_movies_from_bundles(mixed):
     bundles = [movie for movie in mixed if is_bundle(movie)]
     return movies, bundles
 
+# Ignore movies that are cams uploaded to the HD section
+def ignore_movies(title):
+    # Strings that identify a bundle
+    ignore_identifier = [
+        "CAM", "HDCAM", "HDTS"
+    ]
+    for identifier in ignore_identifier:
+        if identifier in title:
+            return True
+    return False 
+
 def filenames_to_search_strings(names):
-    return remove_years([movie_title_from_filename(title) for title in names])
+    names = [title for title in names if not ignore_movies(title)]
+    movies = [movie_title_from_filename(title) for title in names]
+    movies = remove_years(movies)
+    movies = list(set(movies))
+    return movies
 
 def print_movies(heading, movie_list):
     if movie_list:
