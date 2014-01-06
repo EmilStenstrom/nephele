@@ -30,7 +30,7 @@ def main(pages=10, debug=False):
     # Remove duplicates. Can't use set() since dict is unhashable
     graded = dict((movie['url'], movie) for movie in graded).values()
 
-    print_movies("Movies not seen, by your grade (and Filmtipset grade)", sorted(filter(lambda x: x["type"] != u'seen', graded), reverse=True))
+    print_movies("Movies not seen, ordered by grade", sorted(filter(lambda x: x["type"] != u'seen', graded), reverse=True))
     print_movies("Bundles, not graded", sorted(bundles))
 
 if __name__ == "__main__":
