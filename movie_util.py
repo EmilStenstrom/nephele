@@ -87,7 +87,7 @@ def print_movies(heading, movie_list):
                 except UnicodeEncodeError:
                     name = name.encode("ascii", "replace")
 
-                print((u" %s %-" + unicode(max_len + 1) + u"s %s (%s)") % (grade, name, url, commongrade))
+                print((u" %s  %-" + unicode(max_len + 1) + u"s %s (%s)") % (grade, name, url, commongrade))
         else:
             # Bundles are printed as single strings
             for movie in movie_list:
