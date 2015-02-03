@@ -5,6 +5,9 @@ from movie_util import filenames_to_search_strings, separate_movies_from_bundles
 from http_util import cached_request
 from filmtipset_util import get_grades
 
+from requests.packages import urllib3
+urllib3.disable_warnings()
+
 # Get list of all Highres movies, popular right now, from piratebay
 def get_movies(start=0, stop=1, debug=False):
     movies = []

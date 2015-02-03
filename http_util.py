@@ -27,7 +27,7 @@ def cached_request(url, type, cache_age_days=1, debug=False):
     else:
         if debug:
             print("WEB: %s" % url)
-        r = requests.get(url, timeout=10)
+        r = requests.get(url, timeout=10, verify=False)
         r.encoding = "utf-8"
         if type == "json":
             content = json.dumps(json.loads(unicode(r.content, "iso-8859-15")), indent=4)
