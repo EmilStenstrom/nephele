@@ -52,7 +52,7 @@ def separate_movies_from_bundles(mixed):
 def ignore_movies(title):
     # Strings that identify a bundle
     ignore_identifier = [
-        "CAM", "HDCAM", "HDTS"
+        "CAM", "HDCAM", "HDTS", "Screener", "HQSCR", "DVDScr",
     ]
     for identifier in ignore_identifier:
         if identifier in title:
