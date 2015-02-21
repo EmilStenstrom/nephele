@@ -16,8 +16,8 @@ def movie_title_from_filename(title):
     # Loop over all words. As soon as a ending is found, cut to there
     for i, word in enumerate(words):
         if word.lower() in ends or word in ends_i or \
-                (i+1 < len(words) and (word + " " + words[i+1]).lower() in ends_double) or \
-                (i+2 < len(words) and (word + " " + words[i+1] + " " + words[i+2]).lower() in ends_triple):
+                (i + 1 < len(words) and (word + " " + words[i + 1]).lower() in ends_double) or \
+                (i + 2 < len(words) and (word + " " + words[i + 1] + " " + words[i + 2]).lower() in ends_triple):
             words = words[:i]
             break
     title = " ".join(words).lower()
@@ -57,7 +57,7 @@ def ignore_movies(title):
     for identifier in ignore_identifier:
         if identifier in title:
             return True
-    return False 
+    return False
 
 def filenames_to_search_strings(names):
     names = [title for title in names if not ignore_movies(title)]
