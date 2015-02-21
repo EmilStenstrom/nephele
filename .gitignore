@@ -2,3 +2,5 @@
 access_keys.py
 /nephele.sublime-project
 /nephele.sublime-workspace
+db.json
+.DS_Store

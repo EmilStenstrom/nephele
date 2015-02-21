@@ -1,3 +1,4 @@
 requests==2.5.1
+tinydb==2.2.2
 lxml==3.4.1
 cssselect==0.9.1

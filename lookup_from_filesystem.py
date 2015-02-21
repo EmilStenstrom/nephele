@@ -1,8 +1,8 @@
 from __future__ import print_function
 import os
 import sys
-from movie_util import filenames_to_search_strings, print_movies
-from filmtipset_util import get_grades
+from utils.movie_util import filenames_to_search_strings, print_movies
+from utils.filmtipset_util import get_grades
 
 def is_proper_movie_file(filename):
     FILE_ENDINGS = [".mkv", ".mp4", ".avi", ".iso", ".mov", ".mpeg"]

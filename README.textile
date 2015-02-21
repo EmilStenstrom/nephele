@@ -1,4 +1,9 @@
-h1. TBD.
+h1. What can the godess of the clouds help you with?
+
+* Get list of popular movies from [Torrentz/Kickass/Piratebay]
+* Convert this list of hits to movie search strings
+* Find and rate these movies using [Netflix/IMDB/Filmtipset]
+* Complete the rating info with movie info from [Netflix/IMDB/Filmtipset]
 
 h2. Specify Access key and Filmtipset user ID
 
