@@ -1,5 +1,4 @@
 *.pyc
-access_key.py
-cache/
-/filmtipset-piratebay.sublime-project
-/filmtipset-piratebay.sublime-workspace
+access_keys.py
+/nephele.sublime-project
+/nephele.sublime-workspace
