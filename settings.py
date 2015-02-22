@@ -9,5 +9,6 @@ MOVIEDATA_PROVIDERS = [
     # "providers.moviedata.imdb",
     "providers.moviedata.filmtipset",
 ]
+OUTPUT_PROVIDER = "providers.output.terminal"
 
 from access_keys import ACCESS_KEYS  # NOQA
