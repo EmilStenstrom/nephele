@@ -15,4 +15,23 @@ class Provider(MoviedataProvider):
         }
         url = "http://www.filmtipset.se/api/api.cgi?" + urlencode(options)
         data = self.parse_json(url, "0.data.0.hits.0.movie")
-        return data
+        if not data:
+            return {}
+
+        data = self.transform_data(data)
+        return data["id"], data
+
+    def get_data_mapping(self):
+        return {
+            "id": lambda data: "tt" + data["imdb"],
+            "title": "orgname",
+            "title_swe": "name",
+            "country": "country",
+            "director": "director",
+            "year": "year",
+            "filmtipset_my_grade": "grade.value",
+            "filmtipset_my_grade_type": "grade.type",
+            "filmtipset_avg_grade": "filmtipsetgrade.value",
+            "filmtipset_url": "url",
+            "filmtipset_id": "id",
+        }
