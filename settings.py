@@ -6,8 +6,8 @@ db_movies = _db.table("movies")
 
 POPULARITY_PROVIDER = "providers.popularity.torrentz"
 MOVIEDATA_PROVIDERS = [
-    # "providers.moviedata.imdb",
     "providers.moviedata.filmtipset",
+    "providers.moviedata.imdb",
 ]
 OUTPUT_PROVIDER = "providers.output.terminal"
 
