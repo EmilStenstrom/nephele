@@ -4,10 +4,7 @@ _db = TinyDB('db.json')
 db_popular = _db.table("popular")
 db_movies = _db.table("movies")
 
-POPULARITY_PROVIDERS = [
-    "providers.popularity.torrentz",
-]
-
+POPULARITY_PROVIDER = "providers.popularity.torrentz"
 MOVIEDATA_PROVIDERS = [
     # "providers.moviedata.imdb",
     "providers.moviedata.filmtipset",

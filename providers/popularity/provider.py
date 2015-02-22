@@ -6,7 +6,7 @@ from providers.provider import BaseProvider
 #
 # To implement a PopularityProvider:
 #   - Create a new file in popularity/ and call it provider_[your name].py
-#   - Add the path to your file in settings.py, under POPULARITY_PROVIDERS
+#   - Add the path to your file in settings.py, under POPULARITY_PROVIDER
 #   - In the new file, Subclass PopularityProvider and provide a IDENTIFIER
 #   - Implement get_popular(), returning a list of movie names (as strings)
 
