@@ -1,7 +1,6 @@
 from tinydb import TinyDB
 
 _db = TinyDB('db.json')
-db_cache = _db.table("cache")
 db_popular = _db.table("popular")
 db_movies = _db.table("movies")
 
