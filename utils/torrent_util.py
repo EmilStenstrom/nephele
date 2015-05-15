@@ -40,17 +40,22 @@ def remove_bad_torrent_matches(names):
         for identifier in bundle_identifier:
             if identifier in name:
                 return True
+
         return False
 
     # Ignore movies that are cams uploaded to the HD section
     def ignore_movies(name):
-        # Strings that identify a bundle
+        # Remove all non-alpha characters
+        words = re.split(r"[^\w'-:]+", name.lower())
+
+        # Strings that identify a low quality movie
         ignore_identifier = [
-            "CAM", "HDCAM", "HDTS", "Screener", "HQSCR", "DVDScr",
+            "cam", "dvdscr", "hc", "hdcam", "hdrip", "hdts", "hqscr", "korsub", "screener", "ts"
         ]
         for identifier in ignore_identifier:
-            if identifier in name:
+            if identifier in words:
                 return True
+
         return False
 
     def remove_duplicates_stable(names):
