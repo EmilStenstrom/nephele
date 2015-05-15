@@ -1,3 +1,4 @@
+from __future__ import print_function
 from tinydb import TinyDB, where
 
 TABLE_POPULAR = "popular"
@@ -15,6 +16,19 @@ class Application(object):
 
     def setting(self, key):
         return self.settings[key]
+
+    def debug(self, message):
+        if self.settings.get("DEBUG", False):
+            print(message)
+
+    def output(self, message):
+        print(message)
+
+    def debug_or_dot(self, message):
+        if self.settings.get("DEBUG", False):
+            print(message)
+        else:
+            print(".", end="")
 
 class Model(object):
     def __init__(self, database, table):

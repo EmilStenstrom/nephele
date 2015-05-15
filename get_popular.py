@@ -1,19 +1,18 @@
-from __future__ import print_function
 import sys
 from importlib import import_module
 from application import APPLICATION as APP
 
 def get_popular(debug=False):
-    print("Fetching Popular:")
+    APP.debug("Fetching popular movies...")
     record = APP.Popular.find("key", "popular")
     if not record:
         provider_module = import_module(APP.setting("POPULARITY_PROVIDER"))
         provider = provider_module.Provider(debug=debug)
-        print("Fetching from %s" % provider_module.IDENTIFIER)
+        APP.debug("Fetching from %s" % provider_module.IDENTIFIER)
         popular = provider.get_popular()
         APP.Popular.insert({"key": "popular", "value": popular})
     else:
-        print("Found result popular_db")
+        APP.debug("Found result popular_db")
 
 def get_moviedata(popular_list, debug=False):
     def get_id_from_name(name):
@@ -62,15 +61,15 @@ def get_moviedata(popular_list, debug=False):
             provider = provider_module.Provider(debug=debug)
             data = get_data_from_id(imdb_id, provider)
             if imdb_id and data:
-                print("Found result in movie db:", imdb_id)
+                APP.debug_or_dot("Found result in movie db: " + imdb_id)
             else:
-                print("Fetching from %s" % provider_module.IDENTIFIER)
+                APP.debug_or_dot("Fetching from %s" % provider_module.IDENTIFIER)
                 _, data = update_mapping_and_movie_db(name, provider)
 
 def output(movie_data):
     provider_module = import_module(APP.setting("OUTPUT_PROVIDER"))
     provider = provider_module.Provider(debug=debug)
-    print("Outputting data with %s" % provider_module.IDENTIFIER)
+    APP.debug("Outputting data with %s" % provider_module.IDENTIFIER)
     provider.output(movie_data)
 
 def main(debug=False):

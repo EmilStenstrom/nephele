@@ -9,4 +9,5 @@ APPLICATION = Application({
         "providers.moviedata.imdb",
     ],
     "OUTPUT_PROVIDER": "providers.output.terminal",
+    # "DEBUG": True,
 })
