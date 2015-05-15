@@ -1,27 +1,23 @@
 from __future__ import print_function
 import sys
-from tinydb import where
 from importlib import import_module
-from settings import (
-    POPULARITY_PROVIDER, MOVIEDATA_PROVIDERS, OUTPUT_PROVIDER,
-    db_popular, db_movies, db_name_to_id_mapping
-)
+from application import APPLICATION as APP
 
 def get_popular(debug=False):
     print("Fetching Popular:")
-    record = db_popular.get(where("key") == "popular")
+    record = APP.Popular.find("key", "popular")
     if not record:
-        provider_module = import_module(POPULARITY_PROVIDER)
+        provider_module = import_module(APP.setting("POPULARITY_PROVIDER"))
         provider = provider_module.Provider(debug=debug)
         print("Fetching from %s" % provider_module.IDENTIFIER)
         popular = provider.get_popular()
-        db_popular.insert({"key": "popular", "value": popular})
+        APP.Popular.insert({"key": "popular", "value": popular})
     else:
         print("Found result popular_db")
 
 def get_moviedata(popular_list, debug=False):
     def get_id_from_name(name):
-        record = db_name_to_id_mapping.get(where("name") == name)
+        record = APP.Name_to_id.find("name", name)
         if record:
             return record["id"]
 
@@ -31,7 +27,7 @@ def get_moviedata(popular_list, debug=False):
         if not imdb_id:
             return None
 
-        record = db_movies.get(where("id") == imdb_id)
+        record = APP.Movie.find("id", imdb_id)
         if record:
             mapping = provider.get_data_mapping()
             has_all_keys = True
@@ -51,23 +47,17 @@ def get_moviedata(popular_list, debug=False):
         imdb_id, data = provider.get_movie_data(name)
 
         if imdb_id:
-            db_name_to_id_mapping.insert({"name": name, "id": imdb_id})
+            APP.Name_to_id.insert({"name": name, "id": imdb_id})
 
         if data:
-            record = db_movies.get(where("id") == imdb_id)
-            if record:
-                # Never overwrite existing data
-                new_data = {key: value for key, value in data.items() if key not in record}
-                db_movies.update(new_data, where("id") == imdb_id)
-            else:
-                db_movies.insert(data)
+            APP.Movie.insert_or_update("id", imdb_id, data)
 
         return imdb_id, data
 
     for name in popular_list:
         imdb_id = get_id_from_name(name)
 
-        for provider_path in MOVIEDATA_PROVIDERS:
+        for provider_path in APP.setting("MOVIEDATA_PROVIDERS"):
             provider_module = import_module(provider_path)
             provider = provider_module.Provider(debug=debug)
             data = get_data_from_id(imdb_id, provider)
@@ -78,7 +68,7 @@ def get_moviedata(popular_list, debug=False):
                 _, data = update_mapping_and_movie_db(name, provider)
 
 def output(movie_data):
-    provider_module = import_module(OUTPUT_PROVIDER)
+    provider_module = import_module(APP.setting("OUTPUT_PROVIDER"))
     provider = provider_module.Provider(debug=debug)
     print("Outputting data with %s" % provider_module.IDENTIFIER)
     provider.output(movie_data)
@@ -86,10 +76,10 @@ def output(movie_data):
 def main(debug=False):
     get_popular(debug=debug)
 
-    records = db_popular.all()
+    records = APP.Popular.all()
     get_moviedata(records[0]["value"], debug=debug)
 
-    records = db_movies.all()
+    records = APP.Movie.all()
     output(records)
 
 # Usage:
