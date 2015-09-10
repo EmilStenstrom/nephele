@@ -3,17 +3,12 @@ from application import APPLICATION as APP
 
 def get_popular():
     APP.debug("Fetching popular movies...")
-    record = APP.Popular.find("key", "popular")
-    if not record:
-        provider_module = import_module(APP.setting("POPULARITY_PROVIDER"))
-        provider = provider_module.Provider()
-        APP.debug("Fetching from %s" % provider_module.IDENTIFIER)
-        popular = provider.get_popular()
-        APP.Popular.insert({"key": "popular", "value": popular})
-    else:
-        APP.debug("Found result popular_db")
+    provider_module = import_module(APP.setting("POPULARITY_PROVIDER"))
+    provider = provider_module.Provider()
+    APP.debug("Fetching from %s" % provider_module.IDENTIFIER)
+    return provider.get_popular()
 
-def get_moviedata(popular_list):
+def update_moviedata(popular_list):
     def get_id_from_name(name):
         record = APP.Name_to_id.find("name", name)
         if record:
@@ -74,10 +69,7 @@ def output(movie_data):
 def main(arguments):
     APP.settings["DEBUG"] = arguments["--debug"]
 
-    get_popular()
-
-    records = APP.Popular.all()
-    get_moviedata(records[0]["value"])
-
+    popular = get_popular()
+    update_moviedata(popular)
     records = APP.Movie.all()
     output(records)

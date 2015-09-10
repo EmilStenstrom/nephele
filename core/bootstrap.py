@@ -8,7 +8,6 @@ TABLE_MOVIES = "movies"
 class Application(object):
     def __init__(self, settings):
         database = TinyDB(settings["DATABASE"])
-        self.Popular = Model(database, TABLE_POPULAR)
         self.Name_to_id = Model(database, TABLE_NAME_TO_ID)
         self.Movie = Model(database, TABLE_MOVIES)
 
