@@ -14,7 +14,7 @@ class Provider(MoviedataProvider):
             "usernr": ACCESS_KEYS[IDENTIFIER]["USER_KEY"],
         }
         url = "http://www.filmtipset.se/api/api.cgi?" + urlencode(options)
-        data = self.parse_json(url, "0.data.0.hits.0.movie")
+        data = self.parse_json(url, path="0.data.0.hits.0.movie")
         if not data:
             return {}
 

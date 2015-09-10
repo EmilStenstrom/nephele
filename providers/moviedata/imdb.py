@@ -12,7 +12,7 @@ class Provider(MoviedataProvider):
             "format": "JSON",
         }
         url = "http://www.myapifilms.com/title?" + urlencode(parameters)
-        data = self.parse_json(url, "0")
+        data = self.parse_json(url, path="0")
         if not data:
             return None, {}
 
