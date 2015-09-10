@@ -17,14 +17,18 @@ class Provider(OutputProvider):
         for data in movie_data[:10]:
             print("%s (Filmtipset: %s, IMDB: %s)" % (
                 data["title"],
-                data["filmtipset_my_grade"] if not data["filmtipset_my_grade"] == 0 else "-",
-                data["imdb_rating"],
+                data.get("filmtipset_my_grade", "-"),
+                data.get("imdb_rating", "-"),
             ))
+
             print("  [Genre: %s, Country: %s, Year: %s]" % (
-                ", ".join(data["genre"]),
-                data["country"],
-                data["year"],
+                ", ".join(data.get("genre", "-")),
+                data.get("country", "-"),
+                data.get("year", "-"),
             ))
-            text = textwrap.wrap('Plot: "' + data["plot"] + '"', width=80, initial_indent="  ", subsequent_indent="  ")
-            print("\n".join(text))
+
+            plot = data.get("plot", None)
+            if plot:
+                text = textwrap.wrap('Plot: "' + data.get("plot", "-") + '"', width=80, initial_indent="  ", subsequent_indent="  ")
+                print("\n".join(text))
             print()
