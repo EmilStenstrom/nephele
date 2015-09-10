@@ -4,9 +4,6 @@ from requests.utils import get_unicode_from_response
 from lxml import html as lxml_html
 
 class BaseProvider(object):
-    def __init__(self, debug=False):
-        self.debug = debug
-
     # ==== HELPER METHODS ====
     def parse_html(self, url, css_selector):
         html = self._http_get(url)

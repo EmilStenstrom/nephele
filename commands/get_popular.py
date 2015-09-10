@@ -1,19 +1,19 @@
 from importlib import import_module
 from application import APPLICATION as APP
 
-def get_popular(debug=False):
+def get_popular():
     APP.debug("Fetching popular movies...")
     record = APP.Popular.find("key", "popular")
     if not record:
         provider_module = import_module(APP.setting("POPULARITY_PROVIDER"))
-        provider = provider_module.Provider(debug=debug)
+        provider = provider_module.Provider()
         APP.debug("Fetching from %s" % provider_module.IDENTIFIER)
         popular = provider.get_popular()
         APP.Popular.insert({"key": "popular", "value": popular})
     else:
         APP.debug("Found result popular_db")
 
-def get_moviedata(popular_list, debug=False):
+def get_moviedata(popular_list):
     def get_id_from_name(name):
         record = APP.Name_to_id.find("name", name)
         if record:
@@ -57,7 +57,7 @@ def get_moviedata(popular_list, debug=False):
 
         for provider_path in APP.setting("MOVIEDATA_PROVIDERS"):
             provider_module = import_module(provider_path)
-            provider = provider_module.Provider(debug=debug)
+            provider = provider_module.Provider()
             data = get_data_from_id(imdb_id, provider)
             if imdb_id and data:
                 APP.debug_or_dot("Found result in movie db: " + imdb_id)
@@ -65,18 +65,19 @@ def get_moviedata(popular_list, debug=False):
                 APP.debug_or_dot("Fetching from %s" % provider_module.IDENTIFIER)
                 _, data = update_mapping_and_movie_db(name, provider)
 
-def output(movie_data, debug=False):
+def output(movie_data):
     provider_module = import_module(APP.setting("OUTPUT_PROVIDER"))
-    provider = provider_module.Provider(debug=debug)
+    provider = provider_module.Provider()
     APP.debug("Outputting data with %s" % provider_module.IDENTIFIER)
     provider.output(movie_data)
 
 def main(arguments):
-    debug = "debug" in arguments
-    get_popular(debug=debug)
+    APP.settings["DEBUG"] = arguments["--debug"]
+
+    get_popular()
 
     records = APP.Popular.all()
-    get_moviedata(records[0]["value"], debug=debug)
+    get_moviedata(records[0]["value"])
 
     records = APP.Movie.all()
-    output(records, debug=debug)
+    output(records)
