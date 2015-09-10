@@ -3,12 +3,12 @@ finding GOOD movies to watch is hard. Let Nephele, the greek
 nymph of the clouds, help you.
 
 Usage:
-  nephele.py get_popular [--debug]
-  nephele.py get_grades <directory> [--debug]
+    nephele.py get_popular [--debug]
+    nephele.py get_grades <directory> [--debug]
 
 Options:
-  -h --help     Show this screen.
-  --debug       Print debug information.
+    -h --help     Show this screen.
+    --debug       Print debug information.
 
 """
 from docopt import docopt
