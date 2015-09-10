@@ -38,7 +38,7 @@ class NameMapper(Model):
         if not imdb_id:
             return
 
-        self.insert({"name": name, "id": imdb_id})
+        self.insert_or_update("id", imdb_id, {"name": name, "id": imdb_id})
 
 class Movie(Model):
     def get_data(self, imdb_id, provider):
