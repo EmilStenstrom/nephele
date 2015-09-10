@@ -14,7 +14,7 @@ class Provider(MoviedataProvider):
         url = "http://www.myapifilms.com/title?" + urlencode(parameters)
         data = self.parse_json(url, "0")
         if not data:
-            return {}
+            return None, {}
 
         data = self.transform_data(data)
         return data["id"], data
