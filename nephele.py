@@ -5,6 +5,7 @@ nymph of the clouds, help you.
 Usage:
     nephele.py get_popular [--debug]
     nephele.py get_grades <directory> [--debug]
+    nephele.py clear_grade_cache <name> [--debug]
 
 Options:
     -h --help     Show this screen.
@@ -16,6 +17,6 @@ import importlib
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
-    command_str = "get_popular" if arguments["get_popular"] else "get_grades"
+    command_str = [key for key, value in arguments.items() if value][0]
     command = importlib.import_module("commands." + command_str)
     command.main(arguments)

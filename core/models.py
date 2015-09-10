@@ -13,6 +13,9 @@ class Model(object):
     def update(self, key, value, data_dict):
         return self.table.update(data_dict, where(key) == value)
 
+    def remove(self, key, value):
+        return self.table.remove(where(key) == value)
+
     def insert_or_update(self, key, value, data_dict):
         record = self.find(key, value)
         if record:
@@ -60,6 +63,9 @@ class Movie(Model):
             return None
 
         return None
+
+    def remove_id(self, imdb_id):
+        self.remove("imdb_id", imdb_id)
 
     def update_movie(self, name, provider):
         imdb_id, data = provider.get_movie_data(name)
