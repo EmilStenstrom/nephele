@@ -35,14 +35,3 @@ def main(directory, debug=False):
 
     print_movies("Movies seen, by your grade (and Filmtipset grade)", filter(lambda x: x["type"] == u'seen', graded))
     print_movies("Movies not seen, by your grade (and Filmtipset grade)", filter(lambda x: x["type"] != u'seen', graded))
-
-# Possible calls:
-# lookup_from_filesystem.py /My-Movies/
-# lookup_from_filesystem.py /My-Movies/ --verbose
-if __name__ == "__main__":
-    directory = sys.argv[1]
-    debug = False
-    if len(sys.argv) == 3:
-        if sys.argv[2] == "--verbose":
-            debug = True
-    main(directory=directory, debug=debug)

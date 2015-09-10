@@ -1,4 +1,3 @@
-import sys
 from importlib import import_module
 from application import APPLICATION as APP
 
@@ -66,28 +65,18 @@ def get_moviedata(popular_list, debug=False):
                 APP.debug_or_dot("Fetching from %s" % provider_module.IDENTIFIER)
                 _, data = update_mapping_and_movie_db(name, provider)
 
-def output(movie_data):
+def output(movie_data, debug=False):
     provider_module = import_module(APP.setting("OUTPUT_PROVIDER"))
     provider = provider_module.Provider(debug=debug)
     APP.debug("Outputting data with %s" % provider_module.IDENTIFIER)
     provider.output(movie_data)
 
-def main(debug=False):
+def main(arguments):
+    debug = "debug" in arguments
     get_popular(debug=debug)
 
     records = APP.Popular.all()
     get_moviedata(records[0]["value"], debug=debug)
 
     records = APP.Movie.all()
-    output(records)
-
-# Usage:
-# python get_popular.py
-# python get_popular.py --verbose
-if __name__ == "__main__":
-    debug = False
-    if len(sys.argv) == 2:
-        if sys.argv[1] == "--verbose":
-            debug = True
-
-    main(debug=debug)
+    output(records, debug=debug)
