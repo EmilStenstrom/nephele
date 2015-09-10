@@ -1,4 +1,4 @@
-from bootstrap import Application
+from core.bootstrap import Application
 from access_keys import ACCESS_KEYS  # NOQA
 
 APPLICATION = Application({
