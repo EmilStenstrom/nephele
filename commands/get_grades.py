@@ -1,36 +1,62 @@
 from __future__ import print_function
 import os
-from utils.movie_util import filenames_to_search_strings, print_movies
-from utils.filmtipset_util import get_grades
+from importlib import import_module
+from application import APPLICATION as APP
+from utils.torrent_util import torrent_to_search_string, remove_bad_torrent_matches
 
-def is_proper_movie_file(filename):
+def is_proper_movie_file(filename, is_directory):
     FILE_ENDINGS = [".mkv", ".mp4", ".avi", ".iso", ".mov", ".mpeg"]
     # Proper filenames
     for ending in FILE_ENDINGS:
         if filename.endswith(ending):
             return True
 
-    # Not other filenames, or files starting with .
-    if "." in filename[-4:] or filename.startswith("."):
-        return False
-
     # Not stuff that ends with "-ignore"
     if filename.endswith("-ignore"):
         return False
 
     # Only directories left
-    return True
+    if is_directory:
+        return True
 
-def get_movies(dir):
-    movies = os.listdir(dir)
-    movies = [movie for movie in movies if is_proper_movie_file(movie)]
+    return False
+
+def get_filenames(directory):
+    APP.debug("Loading movies from: %s" % directory)
+    files = os.listdir(directory)
+    files = [(filename, os.path.isdir(os.path.join(directory, filename))) for filename in files]
+    movies = [filename for filename, is_directory in files if is_proper_movie_file(filename, is_directory)]
     return movies
 
-def main(directory):
-    print("Loading movies from: %s" % directory)
-    movies = get_movies(directory)
-    movies = filenames_to_search_strings(movies)
-    graded = get_grades(movies)
+def update_moviedata(popular_list):
+    for name in popular_list:
+        imdb_id = APP.NameMapper.get_id(name)
 
-    print_movies("Movies seen, by your grade (and Filmtipset grade)", filter(lambda x: x["type"] == u'seen', graded))
-    print_movies("Movies not seen, by your grade (and Filmtipset grade)", filter(lambda x: x["type"] != u'seen', graded))
+        for provider_path in APP.setting("MOVIEDATA_PROVIDERS"):
+            provider_module = import_module(provider_path)
+            provider = provider_module.Provider()
+            data = APP.Movie.get_data(imdb_id, provider)
+            if imdb_id and data:
+                APP.debug_or_dot("Found result in movie db: " + imdb_id)
+            else:
+                APP.debug_or_dot("Fetching from %s" % provider_module.IDENTIFIER)
+                APP.NameMapper.update_mapping(name, provider)
+                APP.Movie.update_movie(name, provider)
+
+def output(movie_data):
+    provider_module = import_module(APP.setting("OUTPUT_PROVIDER"))
+    provider = provider_module.Provider()
+    APP.debug("Outputting data with %s" % provider_module.IDENTIFIER)
+    provider.output(movie_data)
+
+def main(arguments):
+    APP.settings["DEBUG"] = arguments["--debug"]
+    directory = arguments["<directory>"]
+
+    movies = get_filenames(directory)
+    movies = [torrent_to_search_string(name) for name in movies]
+    movies = remove_bad_torrent_matches(movies)
+
+    update_moviedata(movies)
+    records = APP.Movie.all()
+    output(records)
