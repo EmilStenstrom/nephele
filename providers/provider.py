@@ -1,6 +1,9 @@
 import json
 import requests
 from requests.utils import get_unicode_from_response
+from cachecontrol import CacheControl
+from cachecontrol.caches import FileCache
+from cachecontrol.heuristics import ExpiresAfter
 from lxml import html as lxml_html
 
 class BaseProvider(object):
@@ -35,5 +38,6 @@ class BaseProvider(object):
 
     # ==== PRIVATE METHODS ====
     def _http_get(self, url, timeout=60):
-        response = requests.get(url, timeout=timeout)
+        session = CacheControl(requests.Session(), heuristic=ExpiresAfter(days=1), cache=FileCache('.webcache'))
+        response = session.get(url, timeout=timeout)
         return get_unicode_from_response(response)

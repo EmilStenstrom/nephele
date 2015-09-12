@@ -1,6 +1,7 @@
 *.pyc
 access_keys.py
 application.py
+.webcache
 /nephele.sublime-project
 /nephele.sublime-workspace
 db.json

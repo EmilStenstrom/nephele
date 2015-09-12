@@ -1,4 +1,6 @@
 import re
+import shutil
+import os
 from application import APPLICATION as APP
 
 def clear_cache(name):
@@ -15,6 +17,10 @@ def clear_cache(name):
         APP.output("Deleted movie \"%s\" from movie db" % name)
     else:
         APP.output("Could not find \"%s\" in movie db" % name)
+
+    if os.path.exists(".webcache"):
+        shutil.rmtree(".webcache")
+        APP.debug("Removing .webcache directory used by requests")
 
 def main(arguments):
     APP.settings["DEBUG"] = arguments["--debug"]
