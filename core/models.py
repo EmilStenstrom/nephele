@@ -7,6 +7,9 @@ class Model(object):
     def find(self, key, value):
         return self.table.get(where(key) == value)
 
+    def contains(self, key, value):
+        return self.table.contains(where(key) == value)
+
     def insert(self, data_dict):
         return self.table.insert(data_dict)
 
@@ -36,21 +39,19 @@ class NameMapper(Model):
 
         return None
 
-    def update_mapping(self, name, provider):
-        imdb_id, data = provider.get_movie_data(name)
+    def update_mapping(self, name, imdb_id):
         if not imdb_id:
             return
 
         self.insert_or_update("id", imdb_id, {"name": name, "id": imdb_id})
 
 class Movie(Model):
-    def get_data(self, imdb_id, provider):
+    def get_data(self, imdb_id, mapping):
         if not imdb_id:
             return None
 
         record = self.find("id", imdb_id)
         if record:
-            mapping = provider.get_data_mapping()
             has_all_keys = True
             for key in mapping.keys():
                 if key not in record:
@@ -67,9 +68,7 @@ class Movie(Model):
     def remove_id(self, imdb_id):
         self.remove("id", imdb_id)
 
-    def update_movie(self, name, provider):
-        imdb_id, data = provider.get_movie_data(name)
-
+    def update_movie(self, name, imdb_id, data):
         if data:
             self.insert_or_update("id", imdb_id, data)
 

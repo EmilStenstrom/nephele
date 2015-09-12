@@ -3,6 +3,7 @@ import os
 from importlib import import_module
 from application import APPLICATION as APP
 from utils.torrent_util import torrent_to_search_string, remove_bad_torrent_matches
+from utils.movie_util import update_moviedata
 
 def is_proper_movie_file(filename, is_directory):
     FILE_ENDINGS = [".mkv", ".mp4", ".avi", ".iso", ".mov", ".mpeg"]
@@ -28,21 +29,6 @@ def get_filenames(directory):
     movies = [filename for filename, is_directory in files if is_proper_movie_file(filename, is_directory)]
     return movies
 
-def update_moviedata(popular_list):
-    for name in popular_list:
-        imdb_id = APP.NameMapper.get_id(name)
-
-        for provider_path in APP.setting("MOVIEDATA_PROVIDERS"):
-            provider_module = import_module(provider_path)
-            provider = provider_module.Provider()
-            data = APP.Movie.get_data(imdb_id, provider)
-            if imdb_id and data:
-                APP.debug_or_dot("Found result in movie db: " + imdb_id)
-            else:
-                APP.debug_or_dot("Fetching from %s" % provider_module.IDENTIFIER)
-                APP.NameMapper.update_mapping(name, provider)
-                APP.Movie.update_movie(name, provider)
-
 def output(movie_data):
     provider_module = import_module(APP.setting("OUTPUT_PROVIDER"))
     provider = provider_module.Provider()
@@ -57,6 +43,6 @@ def main(arguments):
     movies = [torrent_to_search_string(name) for name in movies]
     movies = remove_bad_torrent_matches(movies)
 
-    update_moviedata(movies)
+    update_moviedata(movies, APP)
     records = APP.Movie.all()
     output(records)
