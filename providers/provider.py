@@ -5,8 +5,8 @@ from lxml import html as lxml_html
 
 class BaseProvider(object):
     # ==== HELPER METHODS ====
-    def parse_html(self, url, css_selector):
-        html = self._http_get(url)
+    def parse_html(self, url, css_selector, timeout=60):
+        html = self._http_get(url, timeout=timeout)
         document = lxml_html.document_fromstring(html)
         results = document.cssselect(css_selector)
         data = [result.text_content() for result in results]
@@ -27,13 +27,13 @@ class BaseProvider(object):
 
         return data
 
-    def parse_json(self, url, path=None):
-        data = self._http_get(url)
+    def parse_json(self, url, path=None, timeout=60):
+        data = self._http_get(url, timeout=timeout)
         data = json.loads(data)
         data = self.traverse_json(data, path)
         return data
 
     # ==== PRIVATE METHODS ====
-    def _http_get(self, url, timeout=60 * 60):
-        response = requests.get(url, timeout=10)
+    def _http_get(self, url, timeout=60):
+        response = requests.get(url, timeout=timeout)
         return get_unicode_from_response(response)
