@@ -9,7 +9,7 @@ def torrent_to_search_string(name):
     ends_triple = ["the final cut"]
 
     # Remove all non-alpha characters
-    words = re.split(r"[^\w'-:]+", name)
+    words = re.split(r"[^\w'\:]+", name)
 
     # Loop over all words. As soon as a ending is found, cut to there
     for i, word in enumerate(words):
