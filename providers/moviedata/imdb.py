@@ -9,6 +9,7 @@ class Provider(MoviedataProvider):
         parameters = {
             "title": name,
             "limit": 1,
+            "filter": "M",
             "format": "JSON",
         }
         url = "http://www.myapifilms.com/title?" + urlencode(parameters)
