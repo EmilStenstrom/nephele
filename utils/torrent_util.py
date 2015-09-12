@@ -46,6 +46,16 @@ def remove_bad_torrent_matches(names):
 
         return False
 
+    def ignore_tv_series(name):
+        tv_regex = r"s\d\de\d\d"
+        if re.search(tv_regex, name, re.IGNORECASE):
+            return True
+
+        if "hdtv" in name:
+            return True
+
+        return False
+
     # Ignore movies that are cams uploaded to the HD section
     def ignore_movies(name):
         # Remove all non-alpha characters
@@ -71,6 +81,7 @@ def remove_bad_torrent_matches(names):
 
     names = [name for name in names if not is_bundle(name)]
     names = [name for name in names if not ignore_movies(name)]
+    names = [name for name in names if not ignore_tv_series(name)]
     names = remove_duplicates_stable(names)
 
     return names
