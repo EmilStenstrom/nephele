@@ -1,6 +1,7 @@
 from providers.moviedata.provider import MoviedataProvider
 from urllib import urlencode
 from settings import ACCESS_KEYS
+from application import APPLICATION as APP
 
 IDENTIFIER = "Filmtipset"
 
@@ -14,6 +15,7 @@ class Provider(MoviedataProvider):
             "usernr": ACCESS_KEYS[IDENTIFIER]["USER_KEY"],
         }
         url = "http://www.filmtipset.se/api/api.cgi?" + urlencode(options)
+        APP.debug("Fetching url: %s" % url)
         data = self.parse_json(url, path="0.data.0.hits.0.movie")
         if not data:
             return {}

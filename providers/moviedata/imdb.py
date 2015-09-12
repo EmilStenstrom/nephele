@@ -1,6 +1,7 @@
 import re
 from providers.moviedata.provider import MoviedataProvider
 from urllib import urlencode
+from application import APPLICATION as APP
 
 IDENTIFIER = "IMDB"
 
@@ -13,6 +14,7 @@ class Provider(MoviedataProvider):
             "format": "JSON",
         }
         url = "http://www.myapifilms.com/title?" + urlencode(parameters)
+        APP.debug("Fetching url: %s" % url)
         data = self.parse_json(url, path="0")
         if not data:
             return None, {}
