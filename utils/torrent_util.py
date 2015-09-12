@@ -8,6 +8,9 @@ def torrent_to_search_string(name):
     ends_double = ["dir cut", "ext cut", "web dl", "dual audio"]
     ends_triple = ["the final cut"]
 
+    # Remove everything after a three words and a parentesis with a year
+    name = re.sub(r"^((?:.*[ \.]){3,}\(\d\d\d\d\)).+", r"\1", name)
+
     # Remove all non-alpha characters
     words = re.split(r"[^\w'\:]+", name)
 
