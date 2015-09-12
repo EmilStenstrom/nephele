@@ -15,6 +15,6 @@ class Provider(PopularityProvider):
             )
             results += self.parse_html(url, ".results dt a")
 
-        results = remove_bad_torrent_matches(results)
         results = [torrent_to_search_string(name) for name in results]
+        results = remove_bad_torrent_matches(results)
         return results
