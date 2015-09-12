@@ -65,7 +65,7 @@ class Movie(Model):
         return None
 
     def remove_id(self, imdb_id):
-        self.remove("imdb_id", imdb_id)
+        self.remove("id", imdb_id)
 
     def update_movie(self, name, provider):
         imdb_id, data = provider.get_movie_data(name)

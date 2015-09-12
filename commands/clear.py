@@ -9,8 +9,12 @@ def clear_cache(name):
         APP.output("Found no movie named \"%s\"" % name)
         return
 
-    APP.debug("Found matching IMDB id %s..." % imdb_id)
-    APP.Movie.remove_id(imdb_id)
+    APP.debug("Found matching IMDB id %s in name mapper..." % imdb_id)
+    success = APP.Movie.remove_id(imdb_id)
+    if success:
+        APP.output("Deleted movie \"%s\" from movie db" % name)
+    else:
+        APP.output("Could not find \"%s\" in movie db" % name)
 
 def main(arguments):
     APP.settings["DEBUG"] = arguments["--debug"]

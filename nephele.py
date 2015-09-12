@@ -5,7 +5,7 @@ nymph of the clouds, help you.
 Usage:
     nephele.py get_popular [--debug]
     nephele.py get_grades <directory> [--debug]
-    nephele.py clear_grade_cache <name> [--debug]
+    nephele.py clear <name> [--debug]
 
 Options:
     -h --help     Show this screen.
