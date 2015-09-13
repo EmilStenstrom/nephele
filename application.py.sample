@@ -1,9 +1,10 @@
 from core.bootstrap import Application
+from requests_cache import CachedSession
 from access_keys import ACCESS_KEYS  # NOQA
 
 APPLICATION = Application({
     "DATABASE": "db.json",
-    "WEBCACHE": 'webcache',
+    "WEBCACHE": CachedSession(cache_name="webcache"),
     "POPULARITY_PROVIDER": "providers.popularity.torrentz",
     "MOVIEDATA_PROVIDERS": [
         "providers.moviedata.imdb",
