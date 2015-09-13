@@ -15,6 +15,8 @@ class Provider(MoviedataProvider):
         }
         if movie["year"]:
             parameters["year"] = movie["year"]
+            # Note limits are set before filtering, so with limit 1 we get no hits
+            parameters["limit"] = 5
 
         if IDENTIFIER in ACCESS_KEYS:
             parameters["token"] = ACCESS_KEYS[IDENTIFIER]["TOKEN"]
