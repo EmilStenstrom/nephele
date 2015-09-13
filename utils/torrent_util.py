@@ -1,7 +1,7 @@
 import re
 
 # Cut out the movie name from a torrent name
-def torrent_to_search_string(name):
+def torrent_to_movie(name):
     # Strings that mark the end of a movie name, and start of meta data
     ends = ["1280p", "1080p", "720p", "r6", "bluray", "bdrip", "brrip", "blu-ray", "blu", "bd", "hd", "hc", "hdtv", "hdcam", "hdscr", "korsub", "extended", "uncut", "unrated", "repack", "r3", "swesub", "ac3", "xvid", "hdrip", "dvdscr", "rc", "dvdrip", "dvdr", "webrip", "rerip", "proper", "hq", "directors", "retail", "boxset", "imax", "x264", "tc", "bdrip720p", "bdrip1080p", "edition", "limited", "french", "swedish", "hindi", "italian", "kor", "nlsubs", "pal", "mkv", "avi", "iso", "mp4", "mpeg", "mov"]
     ends_i = ["iNTERNAL", "CUSTOM", "TS"]  # Case sensitive strings
@@ -26,12 +26,20 @@ def torrent_to_search_string(name):
     # Remove unnessesary whitespace
     name = name.strip()
 
-    # Remove year from end of name
-    name = re.sub(" \d{4}$", "", name)
+    # Split name and year and return both
+    matches = re.split(r" (?=\d{4}$)", name)
+    if len(matches) == 2:
+        name, year = matches
+    else:
+        name = matches[0]
+        year = None
 
-    return name
+    return {
+        "name": name,
+        "year": year,
+    }
 
-def remove_bad_torrent_matches(names):
+def remove_bad_torrent_matches(movies):
     # Identify bundles of movies, as opposed to a single movie
     def is_bundle(name):
         # Strings that identify a bundle
@@ -71,17 +79,17 @@ def remove_bad_torrent_matches(names):
 
         return False
 
-    def remove_duplicates_stable(names):
+    def remove_duplicates_stable(movies):
         nodups = []
-        for name in names:
-            if name not in nodups:
-                nodups.append(name)
+        for movie in movies:
+            if movie not in nodups:
+                nodups.append(movie)
 
         return nodups
 
-    names = [name for name in names if not is_bundle(name)]
-    names = [name for name in names if not ignore_movies(name)]
-    names = [name for name in names if not ignore_tv_series(name)]
-    names = remove_duplicates_stable(names)
+    movies = [movie for movie in movies if not is_bundle(movie["name"])]
+    movies = [movie for movie in movies if not ignore_movies(movie["name"])]
+    movies = [movie for movie in movies if not ignore_tv_series(movie["name"])]
+    movies = remove_duplicates_stable(movies)
 
-    return names
+    return movies

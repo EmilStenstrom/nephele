@@ -6,9 +6,9 @@ from application import APPLICATION as APP
 IDENTIFIER = "IMDB"
 
 class Provider(MoviedataProvider):
-    def get_movie_data(self, name):
+    def get_movie_data(self, movie):
         parameters = {
-            "title": name,
+            "title": movie["name"],
             "limit": 1,
             "filter": "M",
             "format": "JSON",

@@ -1,8 +1,8 @@
 from importlib import import_module
 
 def update_moviedata(movies, APP):
-    for name in movies:
-        imdb_id = APP.NameMapper.get_id(name)
+    for movie in movies:
+        imdb_id = APP.NameMapper.get_id(movie["name"])
 
         for provider_path in APP.setting("MOVIEDATA_PROVIDERS"):
             provider_module = import_module(provider_path)
@@ -13,6 +13,6 @@ def update_moviedata(movies, APP):
                 APP.debug_or_dot("Found result in movie db: " + imdb_id)
             else:
                 APP.debug_or_dot("Fetching from %s" % provider_module.IDENTIFIER)
-                APP.NameMapper.update_mapping(name, imdb_id)
-                imdb_id, data = provider.get_movie_data(name)
-                APP.Movie.update_movie(name, imdb_id, data)
+                imdb_id, data = provider.get_movie_data(movie)
+                APP.NameMapper.update_mapping(movie["name"], imdb_id)
+                APP.Movie.update_movie(movie["name"], imdb_id, data)

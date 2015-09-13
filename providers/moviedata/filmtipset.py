@@ -6,10 +6,10 @@ from application import APPLICATION as APP
 IDENTIFIER = "Filmtipset"
 
 class Provider(MoviedataProvider):
-    def get_movie_data(self, name):
+    def get_movie_data(self, movie):
         options = {
             "action": "search",
-            "id": name,
+            "id": movie["name"],
             "returntype": "json",
             "accesskey": ACCESS_KEYS[IDENTIFIER]["ACCESS_KEY"],
             "usernr": ACCESS_KEYS[IDENTIFIER]["USER_KEY"],
