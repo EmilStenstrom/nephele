@@ -1,6 +1,6 @@
 from providers.moviedata.provider import MoviedataProvider
 from urllib import urlencode
-from settings import ACCESS_KEYS
+from access_keys import ACCESS_KEYS
 from application import APPLICATION as APP
 
 IDENTIFIER = "Filmtipset"
