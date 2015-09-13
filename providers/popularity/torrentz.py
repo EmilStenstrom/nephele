@@ -13,7 +13,7 @@ class Provider(PopularityProvider):
             url = "https://torrentz.eu/search?q=%s&p=%s" % (
                 "+".join(terms), page
             )
-            names += self.parse_html(url, ".results dt a")
+            names += self.parse_html(url, ".results dt a", cache=False)
 
         movies = [torrent_to_movie(name) for name in names]
         movies = remove_bad_torrent_matches(movies)

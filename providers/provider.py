@@ -7,8 +7,8 @@ from application import APPLICATION as APP
 
 class BaseProvider(object):
     # ==== HELPER METHODS ====
-    def parse_html(self, url, css_selector, timeout=60):
-        html = self._http_get(url, timeout=timeout)
+    def parse_html(self, url, css_selector, timeout=60, cache=True):
+        html = self._http_get(url, timeout=timeout, cache=cache)
         document = lxml_html.document_fromstring(html)
         results = document.cssselect(css_selector)
         data = [result.text_content() for result in results]
@@ -29,8 +29,8 @@ class BaseProvider(object):
 
         return data
 
-    def parse_json(self, url, path=None, timeout=60):
-        data = self._http_get(url, timeout=timeout)
+    def parse_json(self, url, path=None, timeout=60, cache=True):
+        data = self._http_get(url, timeout=timeout, cache=cache)
         data = json.loads(data)
         data = self.traverse_json(data, path)
         return data
