@@ -2,6 +2,7 @@ import json
 import requests
 from requests.utils import get_unicode_from_response
 from cachecontrol import CacheControl
+from cachecontrol.heuristics import ExpiresAfter
 from lxml import html as lxml_html
 from application import APPLICATION as APP
 
@@ -37,6 +38,6 @@ class BaseProvider(object):
 
     # ==== PRIVATE METHODS ====
     def _http_get(self, url, timeout=60):
-        session = CacheControl(requests.Session(), cache=APP.setting("FILE_CACHE"))
+        session = CacheControl(requests.Session(), heuristic=ExpiresAfter(days=30), cache=APP.setting("FILE_CACHE"))
         response = session.get(url, timeout=timeout)
         return get_unicode_from_response(response)
