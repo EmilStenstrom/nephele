@@ -7,8 +7,8 @@ APPLICATION = Application({
     "FILE_CACHE": FileCache('.webcache', forever=True),
     "POPULARITY_PROVIDER": "providers.popularity.torrentz",
     "MOVIEDATA_PROVIDERS": [
-        "providers.moviedata.filmtipset",
         "providers.moviedata.imdb",
+        "providers.moviedata.filmtipset",
     ],
     "OUTPUT_PROVIDER": "providers.output.terminal",
     # "DEBUG": True,
