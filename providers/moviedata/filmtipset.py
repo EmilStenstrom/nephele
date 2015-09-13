@@ -18,7 +18,7 @@ class Provider(MoviedataProvider):
         APP.debug("Fetching url: %s" % url)
         data = self.parse_json(url, path="0.data.0.hits.0.movie")
         if not data:
-            return {}
+            return None, {}
 
         data = self.transform_data(data)
         return data["id"], data
