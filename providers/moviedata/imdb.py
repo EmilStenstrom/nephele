@@ -13,6 +13,9 @@ class Provider(MoviedataProvider):
             "filter": "M",
             "format": "JSON",
         }
+        if movie["year"]:
+            parameters["year"] = movie["year"]
+
         url = "http://www.myapifilms.com/title?" + urlencode(parameters)
         APP.debug("Fetching url: %s" % url)
         data = self.parse_json(url, path="0")
