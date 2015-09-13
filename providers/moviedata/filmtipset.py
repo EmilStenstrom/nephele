@@ -6,7 +6,7 @@ from application import APPLICATION as APP
 IDENTIFIER = "Filmtipset"
 
 class Provider(MoviedataProvider):
-    def get_movie_data(self, movie):
+    def get_url(self, movie):
         options = {
             "action": "search",
             "id": movie["name"],
@@ -14,7 +14,10 @@ class Provider(MoviedataProvider):
             "accesskey": ACCESS_KEYS[IDENTIFIER]["ACCESS_KEY"],
             "usernr": ACCESS_KEYS[IDENTIFIER]["USER_KEY"],
         }
-        url = "http://www.filmtipset.se/api/api.cgi?" + urlencode(options)
+        return "http://www.filmtipset.se/api/api.cgi?" + urlencode(options)
+
+    def get_movie_data(self, movie):
+        url = self.get_url(movie)
         APP.debug("Fetching url: %s" % url)
         data = self.parse_json(url, path="0.data.0.hits")
         data = self.find_movie_matching_year(data, movie["year"])

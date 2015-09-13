@@ -7,7 +7,9 @@ from providers.provider import BaseProvider
 #   - Create a new file in moviedata/ and call it provider_[your name].py
 #   - Add the path to your file in settings.py, under MOVIEDATA_PROVIDERS
 #   - In the new file, Subclass MoviedataProvider and provide a IDENTIFIER
-#   - Implement get_movie_data()
+#   - Implement get_url() if your backend makes external HTTP requests
+#       - It's used to purge the HTTP cache later
+#   - Implement get_movie_data() that recieves a dict with a name and possibly a year
 #       -  It returns a tuple of a imdb_id and a dictionary with movie data
 #   - Implement get_data_fields()
 #       -  It returns a dictionary mapping db fields to data that
@@ -16,7 +18,10 @@ from providers.provider import BaseProvider
 class MoviedataProvider(BaseProvider):
     IDENTIFIER = None
 
-    def get_movie_data(self, name):
+    def get_url(self, movie):
+        raise NotImplementedError("Subclasses must implement get_url")
+
+    def get_movie_data(self, movie):
         raise NotImplementedError("Subclasses must implement get_movie_data")
 
     def get_data_mapping(self):

@@ -6,7 +6,7 @@ from application import APPLICATION as APP
 IDENTIFIER = "IMDB"
 
 class Provider(MoviedataProvider):
-    def get_movie_data(self, movie):
+    def get_url(self, movie):
         parameters = {
             "title": movie["name"],
             "limit": 1,
@@ -16,7 +16,10 @@ class Provider(MoviedataProvider):
         if movie["year"]:
             parameters["year"] = movie["year"]
 
-        url = "http://www.myapifilms.com/title?" + urlencode(parameters)
+        return "http://www.myapifilms.com/title?" + urlencode(parameters)
+
+    def get_movie_data(self, movie):
+        url = self.get_url(movie)
         APP.debug("Fetching url: %s" % url)
         data = self.parse_json(url, path="0")
         if not data:
