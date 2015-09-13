@@ -1,8 +1,7 @@
 import re
 from providers.moviedata.provider import MoviedataProvider
 from urllib import urlencode
-from access_keys import ACCESS_KEYS
-from application import APPLICATION as APP
+from application import ACCESS_KEYS, APPLICATION as APP
 
 IDENTIFIER = "MyAPIfilms"
 
