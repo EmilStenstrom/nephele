@@ -1,10 +1,9 @@
 from core.bootstrap import Application
-from cachecontrol.caches import FileCache
 from access_keys import ACCESS_KEYS  # NOQA
 
 APPLICATION = Application({
     "DATABASE": "db.json",
-    "FILE_CACHE": FileCache('.webcache', forever=True),
+    "WEBCACHE": 'webcache',
     "POPULARITY_PROVIDER": "providers.popularity.torrentz",
     "MOVIEDATA_PROVIDERS": [
         "providers.moviedata.imdb",

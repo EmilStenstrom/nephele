@@ -1,8 +1,7 @@
 import json
 import requests
 from requests.utils import get_unicode_from_response
-from cachecontrol import CacheControl
-from cachecontrol.heuristics import ExpiresAfter
+from requests_cache import CachedSession
 from lxml import html as lxml_html
 from application import APPLICATION as APP
 
@@ -37,7 +36,10 @@ class BaseProvider(object):
         return data
 
     # ==== PRIVATE METHODS ====
-    def _http_get(self, url, timeout=60):
-        session = CacheControl(requests.Session(), heuristic=ExpiresAfter(days=30), cache=APP.setting("FILE_CACHE"))
-        response = session.get(url, timeout=timeout)
+    def _http_get(self, url, timeout=60, cache=True):
+        base = requests
+        if cache:
+            base = CachedSession(cache_name=APP.setting("WEBCACHE"))
+
+        response = base.get(url, timeout=timeout)
         return get_unicode_from_response(response)
