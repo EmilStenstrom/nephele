@@ -2,8 +2,8 @@ import json
 import requests
 from requests.utils import get_unicode_from_response
 from cachecontrol import CacheControl
-from cachecontrol.caches import FileCache
 from lxml import html as lxml_html
+from application import APPLICATION as APP
 
 class BaseProvider(object):
     # ==== HELPER METHODS ====
@@ -37,6 +37,6 @@ class BaseProvider(object):
 
     # ==== PRIVATE METHODS ====
     def _http_get(self, url, timeout=60):
-        session = CacheControl(requests.Session(), cache=FileCache('.webcache', forever=True))
+        session = CacheControl(requests.Session(), cache=APP.setting("FILE_CACHE"))
         response = session.get(url, timeout=timeout)
         return get_unicode_from_response(response)
