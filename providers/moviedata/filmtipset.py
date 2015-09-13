@@ -15,17 +15,16 @@ class Provider(MoviedataProvider):
         }
         return "http://www.filmtipset.se/api/api.cgi?" + urlencode(options)
 
-    def get_movie_data(self, movie):
+    def fetch_movie_data(self, movie):
         url = self.get_url(movie)
         APP.debug("Fetching url: %s" % url)
         data = self.parse_json(url, path="0.data.0.hits")
         data = self.find_movie_matching_year(data, movie["year"])
 
         if not data:
-            return None, {}
+            return {}
 
-        data = self.transform_data(data)
-        return data["id"], data
+        return self.transform_data(data)
 
     def find_movie_matching_year(self, data, year):
         if not year:

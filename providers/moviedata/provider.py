@@ -9,8 +9,8 @@ from providers.provider import BaseProvider
 #   - In the new file, Subclass MoviedataProvider and provide a IDENTIFIER
 #   - Implement get_url() if your backend makes external HTTP requests
 #       - It's used to purge the HTTP cache later
-#   - Implement get_movie_data() that recieves a dict with a name and possibly a year
-#       -  It returns a tuple of a imdb_id and a dictionary with movie data
+#   - Implement fetch_movie_data() that recieves a dict with a name and possibly a year
+#       -  It returns a dictionary with movie data
 #   - Implement get_data_fields()
 #       -  It returns a dictionary mapping db fields to data that
 #          this provider has added to data
@@ -21,8 +21,8 @@ class MoviedataProvider(BaseProvider):
     def get_url(self, movie):
         raise NotImplementedError("Subclasses must implement get_url")
 
-    def get_movie_data(self, movie):
-        raise NotImplementedError("Subclasses must implement get_movie_data")
+    def fetch_movie_data(self, movie):
+        raise NotImplementedError("Subclasses must implement fetch_movie_data")
 
     def get_data_mapping(self):
         raise NotImplementedError("Subclasses must implement get_data_mapping")

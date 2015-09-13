@@ -16,60 +16,50 @@ class Model(object):
     def update(self, key, value, data_dict):
         return self.table.update(data_dict, where(key) == value)
 
+    def update_by_eid(self, eid, data):
+        return self.table.update(data, eids=[eid])
+
     def remove(self, key, value):
         return self.table.remove(where(key) == value)
-
-    def insert_or_update(self, key, value, data_dict):
-        record = self.find(key, value)
-        if record:
-            # Never overwrite existing data
-            new_data = {key: value for key, value in data_dict.items() if key not in record}
-            return self.update(key, value, new_data)
-        else:
-            return self.insert(data_dict)
 
     def all(self):
         return self.table.all()
 
-class NameMapper(Model):
-    def get_id(self, name):
-        record = self.find("name", name)
-        if record:
-            return record["id"]
-
-        return None
-
-    def update_mapping(self, name, imdb_id):
-        if not imdb_id:
-            return
-
-        self.insert_or_update("id", imdb_id, {"name": name, "id": imdb_id})
-
 class Movie(Model):
-    def get_data(self, imdb_id, mapping):
-        if not imdb_id:
+    def get_data(self, movie):
+        test_fn = lambda value_list, name: name in value_list
+        query = (where("search_phrases").test(test_fn, movie["name"]))
+        if movie["year"]:
+            query &= (where("year") == movie["year"])
+
+        records = self.table.search(query)
+
+        if not records:
             return None
 
-        record = self.find("id", imdb_id)
+        return records[0]
+
+    def has_all_fields(self, movie, mapping):
+        record = self.get_data(movie)
+        if not record:
+            return mapping.keys()
+
+        missing_keys = set(mapping.keys()) - set(record.keys())
+        return list(missing_keys)
+
+    def update_movie(self, movie, data):
+        record = self.find("id", data["id"])
+
+        # Fallback: Sometimes IMDB id's change, use title and year
+        if not record:
+            record = self.get_data(movie)
+
         if record:
-            has_all_keys = True
-            for key in mapping.keys():
-                if key not in record:
-                    has_all_keys = False
-                    break
+            data["search_phrases"] = record.get("search_phrases", [])
+            if movie["name"] not in data["search_phrases"]:
+                data["search_phrases"].append(movie["name"])
 
-            if has_all_keys:
-                return record
-
-            return None
-
-        return None
-
-    def remove_id(self, imdb_id):
-        self.remove("id", imdb_id)
-
-    def update_movie(self, name, imdb_id, data):
-        if data:
-            self.insert_or_update("id", imdb_id, data)
-
-        return imdb_id, data
+            self.update_by_eid(record.eid, data)
+        else:
+            data["search_phrases"] = [movie["name"]]
+            self.insert(data)

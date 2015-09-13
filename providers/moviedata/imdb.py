@@ -23,15 +23,14 @@ class Provider(MoviedataProvider):
 
         return "http://www.myapifilms.com/title?" + urlencode(parameters)
 
-    def get_movie_data(self, movie):
+    def fetch_movie_data(self, movie):
         url = self.get_url(movie)
         APP.debug("Fetching url: %s" % url)
         data = self.parse_json(url, path="0")
         if not data:
-            return None, {}
+            return {}
 
-        data = self.transform_data(data)
-        return data["id"], data
+        return self.transform_data(data)
 
     def get_data_mapping(self):
         return {
