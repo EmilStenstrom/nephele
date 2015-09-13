@@ -1,3 +1,4 @@
+import copy
 import json
 import requests
 from requests.utils import get_unicode_from_response
@@ -18,16 +19,17 @@ class BaseProvider(object):
         if not path:
             return data
 
+        new_data = copy.copy(data)
         for item in path.split("."):
             if item.isdigit():
                 item = int(item)
 
             try:
-                data = data[item]
+                new_data = new_data[item]
             except (IndexError, KeyError):
                 return {}
 
-        return data
+        return new_data
 
     def parse_json(self, url, path=None, timeout=60, cache=True):
         data = self._http_get(url, timeout=timeout, cache=cache)

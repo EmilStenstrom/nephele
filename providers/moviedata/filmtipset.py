@@ -32,9 +32,9 @@ class Provider(MoviedataProvider):
             return self.traverse_json(data, path="0.movie")
 
         for i in range(5):
-            data = self.traverse_json(data, "%s.movie" % i)
-            if data.get("year", None) == year:
-                return data
+            new_data = self.traverse_json(data, path="%s.movie" % i)
+            if new_data.get("year", None) == year:
+                return new_data
 
         return self.traverse_json(data, path="0.movie")
 
