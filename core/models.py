@@ -1,4 +1,5 @@
 from tinydb import where
+from utils.torrent_util import torrent_to_movie
 
 class Model(object):
     def __init__(self, database, table):
@@ -27,8 +28,17 @@ class Model(object):
 
 class Movie(Model):
     def get_data(self, movie):
-        test_fn = lambda value_list, name: name in value_list
-        query = (where("search_phrases").test(test_fn, movie["name"]))
+        def test_fn(value_list, name):
+            return name in value_list
+
+        def equals_clean_movie_name(value, name):
+            return torrent_to_movie(value)["name"] == name
+
+        query = (
+            where("search_phrases").test(test_fn, movie["name"]) |
+            where("title").test(equals_clean_movie_name, movie["name"]) |
+            where("title_swe").test(equals_clean_movie_name, movie["name"])
+        )
         if movie["year"]:
             query &= (where("year") == movie["year"])
 
