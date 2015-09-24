@@ -1,8 +1,12 @@
 from importlib import import_module
 from utils.torrent_util import torrent_to_movie
 from application import APPLICATION as APP
+import platform
 
 def clear_cache(name):
+    if platform.system() == 'Windows':
+        name = name.decode("windows-1252")
+
     APP.debug("Clearing \"%s\" from movie db..." % name)
     movie = torrent_to_movie(name)
     clear_webcache(movie)

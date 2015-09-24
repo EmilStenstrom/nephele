@@ -8,7 +8,7 @@ IDENTIFIER = "MyAPIfilms"
 class Provider(MoviedataProvider):
     def get_url(self, movie):
         parameters = {
-            "title": movie["name"],
+            "title": movie["name"].encode("utf-8"),
             "limit": 1,
             "filter": "M",
             "format": "JSON",

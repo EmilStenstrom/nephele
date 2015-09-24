@@ -8,7 +8,7 @@ class Provider(MoviedataProvider):
     def get_url(self, movie):
         options = {
             "action": "search",
-            "id": movie["name"],
+            "id": movie["name"].encode("utf-8"),
             "returntype": "json",
             "accesskey": ACCESS_KEYS[IDENTIFIER]["ACCESS_KEY"],
             "usernr": ACCESS_KEYS[IDENTIFIER]["USER_KEY"],
