@@ -12,7 +12,7 @@ def torrent_to_movie(name):
     name = re.sub(r"^((?:.*[ \.]){3,}\(\d\d\d\d\)).+", r"\1", name)
 
     # Remove all non-alpha characters
-    words = re.split(r"[^\w'\:]+", name)
+    words = re.split(r"[^\w'\:]+", name, flags=re.UNICODE)
 
     # Loop over all words. As soon as a ending is found, cut to there
     for i, word in enumerate(words):
