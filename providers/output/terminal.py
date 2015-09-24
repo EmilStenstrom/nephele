@@ -7,7 +7,7 @@ IDENTIFIER = "Terminal"
 class Provider(OutputProvider):
     def process_data(self, movie_data):
         movie_data = filter(lambda data: data.get("filmtipset_my_grade_type", "none") != "seen", movie_data)
-        movie_data = sorted(movie_data, key=lambda data: data.get("filmtipset_my_grade", 0), reverse=True)
+        movie_data = sorted(movie_data, key=lambda data: (data.get("filmtipset_my_grade", 0), data.get("imdb_rating", 0)), reverse=True)
         return movie_data
 
     def output(self, movie_data):
