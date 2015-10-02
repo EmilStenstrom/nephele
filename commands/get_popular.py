@@ -20,5 +20,9 @@ def main(arguments):
 
     popular = get_popular()
     update_moviedata(popular, APP)
-    records = APP.Movie.all()
+
+    records = []
+    for movie in popular:
+        records.append(APP.Movie.get_data(movie))
+
     output(records)

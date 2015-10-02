@@ -44,5 +44,9 @@ def main(arguments):
     movies = remove_bad_torrent_matches(movies)
 
     update_moviedata(movies, APP)
-    records = APP.Movie.all()
+
+    records = []
+    for movie in movies:
+        records.append(APP.Movie.get_data(movie))
+
     output(records)
