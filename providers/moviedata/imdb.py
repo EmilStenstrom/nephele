@@ -10,8 +10,8 @@ class Provider(MoviedataProvider):
         parameters = {
             "title": movie["name"].encode("utf-8"),
             "limit": 1,
-            "filter": "M",
-            "format": "JSON",
+            "filter": "3",
+            "format": "json",
         }
         if movie["year"]:
             parameters["year"] = movie["year"]
@@ -21,12 +21,12 @@ class Provider(MoviedataProvider):
         if IDENTIFIER in ACCESS_KEYS:
             parameters["token"] = ACCESS_KEYS[IDENTIFIER]["TOKEN"]
 
-        return "http://www.myapifilms.com/title?" + urlencode(parameters)
+        return "http://www.myapifilms.com/imdb/title?" + urlencode(parameters)
 
     def fetch_movie_data(self, movie):
         url = self.get_url(movie)
         APP.debug("Fetching url: %s" % url)
-        data = self.parse_json(url, path="0")
+        data = self.parse_json(url, path="data.movies.0")
         if not data:
             return {}
 
@@ -35,7 +35,7 @@ class Provider(MoviedataProvider):
     def get_data_mapping(self):
         return {
             "id": "idIMDB",
-            "title": "title",
+            "title": lambda data: data["title"].replace(u"\u00a0", ""),
             "plot": "simplePlot",
             "genre": "genres",
             "director": "directors.0.name",
@@ -49,5 +49,5 @@ class Provider(MoviedataProvider):
             "imdb_url": "urlIMDB",
             "imdb_poster": "urlPoster",
             "imdb_rating": "rating",
-            "imdb_rating_votes": lambda data: re.sub(r"[^\d]", "", data["rating"]),
+            "imdb_rating_votes": lambda data: re.sub(r"[^\d\.]", "", data["rating"]),
         }
