@@ -26,11 +26,12 @@ class Provider(MoviedataProvider):
     def fetch_movie_data(self, movie):
         url = self.get_url(movie)
         APP.debug("Fetching url: %s" % url)
-        data = self.parse_json(url, path="data.movies.0")
-        if not data:
-            return {}
+        data = self.parse_json(url, path="data.movies")
+        for hit in data:
+            if hit and hit["releaseDate"]:
+                return self.transform_data(hit)
 
-        return self.transform_data(data)
+        return {}
 
     def get_data_mapping(self):
         return {
