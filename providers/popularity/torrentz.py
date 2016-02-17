@@ -9,7 +9,7 @@ class Provider(PopularityProvider):
     def get_popular(self):
         names = []
         for page in range(Provider.PAGES_TO_FETCH):
-            terms = ["movies", "hd", "-xxx", "-porn"]
+            terms = ["movies", "720p | 1080p | DVDRip", "-xxx", "-porn"]
             url = "https://torrentz.eu/search?q=%s&p=%s" % (
                 "+".join(terms), page
             )
