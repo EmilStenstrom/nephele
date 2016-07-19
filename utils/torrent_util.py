@@ -38,9 +38,7 @@ def torrent_to_movie(name):
     return {
         "name": name,
         "year": year,
-        "is_tv": is_tv(raw_words),
-        "is_cam": is_cam(raw_words),
-        "is_bundle": is_bundle(raw_words),
+        "is_bad": is_tv(raw_words) or is_cam(raw_words) or is_bundle(raw_words),
     }
 
 def is_tv(words):
@@ -93,9 +91,7 @@ def remove_bad_torrent_matches(movies):
 
         return nodups
 
-    movies = [movie for movie in movies if not movie["is_bundle"]]
-    movies = [movie for movie in movies if not movie["is_tv"]]
-    movies = [movie for movie in movies if not movie["is_cam"]]
+    movies = [movie for movie in movies if not movie["is_bad"]]
     movies = remove_duplicates_stable(movies)
 
     return movies
