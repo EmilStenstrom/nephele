@@ -5,7 +5,7 @@ from access_keys import ACCESS_KEYS  # NOQA
 APPLICATION = Application({
     "DATABASE": "db.json",
     "WEBCACHE": CachedSession(cache_name="webcache"),
-    "POPULARITY_PROVIDER": "providers.popularity.torrentz",
+    "POPULARITY_PROVIDER": "providers.popularity.kickasstorrents",
     "MOVIEDATA_PROVIDERS": [
         "providers.moviedata.imdb",
         "providers.moviedata.filmtipset",
