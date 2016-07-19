@@ -1,4 +1,5 @@
 import re
+from difflib import SequenceMatcher
 
 # Cut out the movie name from a torrent name
 def torrent_to_movie(name):
@@ -86,7 +87,27 @@ def remove_bad_torrent_matches(movies):
     def remove_duplicates_stable(movies):
         nodups = []
         for movie in movies:
-            if movie not in nodups:
+            too_similar = False
+            for existing_movie in nodups:
+                matcher = SequenceMatcher(a=movie["name"], b=existing_movie["name"])
+                is_over_95_percent_similar = (matcher.ratio() > 0.95)
+
+                is_prefix_of_existing = \
+                    movie["name"].startswith(existing_movie["name"]) or \
+                    existing_movie["name"].startswith(movie["name"])
+
+                if is_over_95_percent_similar or is_prefix_of_existing:
+
+                    # Does the movie exist, but with a different year?
+                    if not movie["year"] or movie["year"] == existing_movie["year"]:
+                        too_similar = True
+                        break
+
+            if not too_similar:
+                nodups.append(movie)
+
+            elif len(movie["name"]) > len(existing_movie["name"]):
+                nodups.remove(existing_movie)
                 nodups.append(movie)
 
         return nodups
