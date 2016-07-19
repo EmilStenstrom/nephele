@@ -4,7 +4,7 @@ import re
 def torrent_to_movie(name):
     # Strings that mark the end of a movie name, and start of meta data
     ends = ["1280p", "1080p", "720p", "r6", "bluray", "bdrip", "brrip", "blu-ray", "blu", "bd", "hd", "hc", "hdtv", "hdcam", "hdscr", "korsub", "extended", "uncut", "unrated", "repack", "r3", "swesub", "ac3", "xvid", "hdrip", "dvdscr", "rc", "dvdrip", "dvdr", "webrip", "rerip", "proper", "hq", "directors", "retail", "boxset", "imax", "x264", "tc", "bdrip720p", "bdrip1080p", "edition", "limited", "french", "swedish", "hindi", "italian", "kor", "nlsubs", "pal", "mkv", "avi", "iso", "mp4", "mpeg", "mov"]
-    ends_i = ["iNTERNAL", "CUSTOM", "TS"]  # Case sensitive strings
+    ends_i = ["iNTERNAL", "CUSTOM", "TS", "MULTi"]  # Case sensitive strings
     ends_double = ["dir cut", "ext cut", "web dl", "dual audio"]
     ends_triple = ["the final cut"]
 
