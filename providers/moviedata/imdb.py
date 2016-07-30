@@ -33,6 +33,12 @@ class Provider(MoviedataProvider):
 
         return {}
 
+    def _get_clean_rating(self, data):
+        if "rating" not in data:
+            return ""
+
+        return re.sub(r"[^\d\.]", "", data["rating"])
+
     def get_data_mapping(self):
         return {
             "id": "idIMDB",
@@ -50,5 +56,5 @@ class Provider(MoviedataProvider):
             "imdb_url": "urlIMDB",
             "imdb_poster": "urlPoster",
             "imdb_rating": "rating",
-            "imdb_rating_votes": lambda data: re.sub(r"[^\d\.]", "", data["rating"]),
+            "imdb_rating_votes": self._get_clean_rating,
         }
