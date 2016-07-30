@@ -28,7 +28,7 @@ class Provider(MoviedataProvider):
         APP.debug("Fetching url: %s" % url)
         data = self.parse_json(url, path="data.movies")
         for hit in data:
-            if hit and hit["releaseDate"]:
+            if hit and "releaseDate" in hit and hit["releaseDate"]:
                 return self.transform_data(hit)
 
         return {}
