@@ -48,7 +48,7 @@ def main(arguments):
     records = []
     for movie in movies:
         data = APP.Movie.get_data(movie)
-        if not data:
+        if not data or data in records:
             continue
 
         records.append(data)
