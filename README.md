@@ -1,6 +1,6 @@
 # What is Nephele?
 
-Nephele is a Python script that lets you cross reference movie data from several sources. It currently supports Torrentz, IMDB and Filmtipset (Swedish rating site), but it's easy to add your own providers for new sources.
+Nephele is a Python script that lets you cross reference movie data from several sources. It currently supports **Torrentz**, **IMDB**, **Filmtipset** (Swedish rating site), **Kickass Torrentz**, and **YIFY Movies**. It's easy to add your own providers for new sources if you want (pull requests gladly accepted!).
 
 ## How do I run it?
 
