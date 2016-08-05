@@ -59,7 +59,7 @@ def is_tv(words):
 def is_cam(words):
     # Strings that identify a low quality movie
     ignore_identifier = [
-        "cam", "dvdscr", "hc", "hdcam", "hdrip", "hdts", "hqscr", "korsub", "screener", "ts"
+        "cam", "dvdscr", "hc", "hdcam", "hdrip", "hdts", "hdtc", "hqscr", "korsub", "screener", "ts"
     ]
     tokens = [word.lower() for word in words]
     for identifier in ignore_identifier:
