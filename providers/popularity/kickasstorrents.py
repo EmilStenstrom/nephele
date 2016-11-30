@@ -4,12 +4,19 @@ from utils.torrent_util import torrent_to_movie, remove_bad_torrent_matches
 IDENTIFIER = "kickasstorrents"
 
 class Provider(PopularityProvider):
-    PAGES_TO_FETCH = 1
+    PAGES_TO_FETCH = 3
 
     def get_popular(self):
         names = []
+        base = "https://kickasstorrents.to/highres-movies/"
+        # New mirrors can be found at https://thekickasstorrents.com/
+
         for page in range(Provider.PAGES_TO_FETCH):
-            url = "https://kat.cr/usearch/category%%3Ahighres-movies/%s/" % page
+            if page == 0:
+                url = base
+            else:
+                url = base + "%s/" % (page + 1)
+
             names += self.parse_html(url, "#mainSearchTable .data .cellMainLink", cache=False)
 
         movies = [torrent_to_movie(name) for name in names]
