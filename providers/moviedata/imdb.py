@@ -13,7 +13,7 @@ class Provider(MoviedataProvider):
             "filter": "3",
             "format": "json",
         }
-        if movie["year"]:
+        if "year" in movie and movie["year"]:
             parameters["year"] = movie["year"]
             # Note limits are set before filtering, so with limit 1 we get no hits
             parameters["limit"] = 5
