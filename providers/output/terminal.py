@@ -60,7 +60,6 @@ class Provider(OutputProvider):
                     ", ".join(filtered_data[0].keys()),
                 ))
 
-            print(value)
             filtered_data = filter(lambda data: OPERATORS[op](data.get(field), value), filtered_data)
 
         return filtered_data
