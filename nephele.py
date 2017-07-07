@@ -20,6 +20,7 @@ Options:
 
                      Valid operators are:
                         * Equal: == (if the value is a list, equal means "contains" instead)
+                        * Not equal: == (if the value is a list, not equal means "does not contain" instead)
                         * Larger than: >, Less than: <
                         * Larger than or equal: >=, Less than or equal: <=
 
@@ -28,6 +29,7 @@ Options:
                         * --filter="filmtipset_my_grade>=4"
                         * --filter="imdb_rating>5,filmtipset_my_grade>=4"
                         * --filter="genre==Romance"
+                        * --filter="genre!=Animation"
 
 """
 from docopt import docopt
