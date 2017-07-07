@@ -9,11 +9,11 @@ def get_popular():
     APP.debug("Fetching from %s" % provider_module.IDENTIFIER)
     return provider.get_popular()
 
-def output(movie_data, limit):
+def output(movie_data, limit, filters):
     provider_module = import_module(APP.setting("OUTPUT_PROVIDER"))
     provider = provider_module.Provider()
     APP.debug("Outputting data with %s" % provider_module.IDENTIFIER)
-    provider.output(movie_data, limit)
+    provider.output(movie_data, limit, filters)
 
 def main(arguments):
     APP.settings["DEBUG"] = arguments["--debug"]
@@ -29,4 +29,4 @@ def main(arguments):
 
         records.append(data)
 
-    output(records, int(arguments["--limit"]))
+    output(records, int(arguments["--limit"]), arguments["--filter"])

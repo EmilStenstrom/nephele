@@ -13,5 +13,5 @@ from providers.provider import BaseProvider
 class OutputProvider(BaseProvider):
     IDENTIFIER = None
 
-    def output(self, movie_data):
+    def output(self, movie_data, limit, filters):
         raise NotImplementedError("Subclasses must implement output")
