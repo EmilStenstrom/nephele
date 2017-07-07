@@ -1,14 +1,17 @@
-"""Nephele - Finding movies to watch on the internet is easy,
+"""
+
+Nephele - Finding movies to watch on the internet is easy,
 finding GOOD movies to watch is hard. Let Nephele, the greek
 nymph of the clouds, help you.
 
 Usage:
-    nephele.py get_popular [--debug]
+    nephele.py get_popular [--limit=<n>] [--debug]
     nephele.py get_grades <directory> [--debug]
     nephele.py clear <name> [--debug]
 
 Options:
     -h --help     Show this screen.
+    --limit=<n>   Limit number of returned hits [default: 10]
     --debug       Print debug information.
 
 """

@@ -10,11 +10,11 @@ class Provider(OutputProvider):
         movie_data = sorted(movie_data, key=lambda data: (data.get("filmtipset_my_grade", 0), data.get("imdb_rating", 0)), reverse=True)
         return movie_data
 
-    def output(self, movie_data):
+    def output(self, movie_data, limit):
         movie_data = self.process_data(movie_data)
 
         print()
-        for data in movie_data[:10]:
+        for data in movie_data[:limit]:
             print("%s (Filmtipset: %s, IMDB: %s)" % (
                 data["title"],
                 data.get("filmtipset_my_grade", "-"),
