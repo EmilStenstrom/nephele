@@ -6,7 +6,7 @@ nymph of the clouds, help you.
 
 Usage:
     nephele.py get_popular [--limit=<n>] [--filter=<spec>] [--debug]
-    nephele.py get_grades <directory> [--debug]
+    nephele.py get_grades <directory> [--limit=<n>] [--filter=<spec>] [--debug]
     nephele.py clear <name> [--debug]
 
 Options:

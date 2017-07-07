@@ -29,11 +29,11 @@ def get_filenames(directory):
     movies = [filename for filename, is_directory in files if is_proper_movie_file(filename, is_directory)]
     return movies
 
-def output(movie_data):
+def output(movie_data, limit, filters):
     provider_module = import_module(APP.setting("OUTPUT_PROVIDER"))
     provider = provider_module.Provider()
     APP.debug("Outputting data with %s" % provider_module.IDENTIFIER)
-    provider.output(movie_data)
+    provider.output(movie_data, limit, filters)
 
 def main(arguments):
     APP.settings["DEBUG"] = arguments["--debug"]
@@ -53,4 +53,4 @@ def main(arguments):
 
         records.append(data)
 
-    output(records)
+    output(records, int(arguments["--limit"]), arguments["--filter"])
