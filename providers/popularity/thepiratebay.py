@@ -1,6 +1,9 @@
 from providers.popularity.provider import PopularityProvider
 from utils.torrent_util import torrent_to_movie, remove_bad_torrent_matches
-from urllib import quote
+try:
+    from urllib import quote  # Python 2.X
+except ImportError:
+    from urllib.parse import quote  # Python 3+
 
 IDENTIFIER = "thepiratebay"
 
