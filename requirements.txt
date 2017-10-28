@@ -1,5 +1,5 @@
-requests==2.5.1
-requests-cache==0.4.10
+requests
+requests-cache
 tinydb==2.4
 lxml==3.4.1
 cssselect==0.9.1
