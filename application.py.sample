@@ -7,7 +7,7 @@ APPLICATION = Application({
     "WEBCACHE": CachedSession(cache_name="webcache"),
     "POPULARITY_PROVIDER": "providers.popularity.thepiratebay",
     "MOVIEDATA_PROVIDERS": [
-        "providers.moviedata.imdb",
+        "providers.moviedata.myapifilms",
         "providers.moviedata.filmtipset",
     ],
     "OUTPUT_PROVIDER": "providers.output.terminal",
