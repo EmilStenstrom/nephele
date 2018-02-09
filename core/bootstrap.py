@@ -26,4 +26,4 @@ class Application(object):
         if self.settings.get("DEBUG", False):
             print(message)
         else:
-            print(".", end="")
+            print(".", end="", flush=True)
