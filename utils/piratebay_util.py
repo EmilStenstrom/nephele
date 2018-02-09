@@ -1,6 +1,6 @@
 from __future__ import print_function
 import sys
-from lxml import html
+import html5lib
 from movie_util import filenames_to_search_strings, separate_movies_from_bundles, print_movies
 from http_util import cached_request
 from filmtipset_util import get_grades
@@ -16,7 +16,7 @@ def get_movies(start=0, stop=1, debug=False):
         if not debug:
             print(".", end="")
         content = cached_request("http://thepiratebay.se/browse/207/%s/7" % i, "html", debug=debug)
-        document = html.document_fromstring(content)
+        document = html5lib.parse(content)
         links = document.cssselect(".detLink")
         movies.extend([link.text_content() for link in links])
     if not debug:

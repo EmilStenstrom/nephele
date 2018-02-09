@@ -2,7 +2,7 @@ import copy
 import json
 import requests
 from requests.utils import get_unicode_from_response
-from lxml import html as lxml_html
+import html5lib
 from application import APPLICATION as APP
 
 # Be compatible with python 2 and 3
@@ -15,7 +15,7 @@ class BaseProvider(object):
     # ==== HELPER METHODS ====
     def parse_html(self, url, css_selector, timeout=60, cache=True):
         html = self._http_get(url, timeout=timeout, cache=cache)
-        document = lxml_html.document_fromstring(html)
+        document = html5lib.parse(html)
         results = document.cssselect(css_selector)
         data = [result.text_content() for result in results]
         return data
