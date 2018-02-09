@@ -73,7 +73,7 @@ class Provider(OutputProvider):
 
             keep = []
             for data in filtered_data:
-                if OPERATORS[op](data.get(field), value):
+                if data.get(field) and OPERATORS[op](data.get(field), value):
                     keep.append(data)
 
             filtered_data = keep
