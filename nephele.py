@@ -37,6 +37,10 @@ import importlib
 
 if __name__ == '__main__':
     arguments = docopt(__doc__)
-    command_str = [key for key, value in arguments.items() if value][0]
+    command_str = [
+        key
+        for key, value in arguments.items()
+        if value and not key.startswith("--") and not key.startswith("<")
+    ][0]
     command = importlib.import_module("commands." + command_str)
     command.main(arguments)
