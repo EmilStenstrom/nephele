@@ -71,7 +71,12 @@ class Provider(OutputProvider):
                     ", ".join(filtered_data[0].keys()),
                 ))
 
-            filtered_data = filter(lambda data: OPERATORS[op](data.get(field), value), filtered_data)
+            keep = []
+            for data in filtered_data:
+                if OPERATORS[op](data.get(field), value):
+                    keep.append(data)
+
+            filtered_data = keep
 
         return filtered_data
 
