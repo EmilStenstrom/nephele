@@ -8,7 +8,7 @@ TABLE_MOVIES = "movies"
 
 class Application(object):
     def __init__(self, settings):
-        database = TinyDB(settings["DATABASE"])
+        database = TinyDB(settings["DATABASE"], indent=4)
         self.Movie = Movie(database, TABLE_MOVIES)
         self.settings = settings
 
