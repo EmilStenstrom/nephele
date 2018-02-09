@@ -1,6 +1,6 @@
-requests==2.5.1
-requests-cache==0.4.10
-tinydb==2.4
-html5lib==1.0.1
-cssselect==0.9.1
-docopt==0.6.1
+requests
+requests-cache
+tinydb
+html5lib
+cssselect
+docopt
