@@ -54,7 +54,9 @@ class Provider(OutputProvider):
             if len(filtered_data) == 0:
                 return filtered_data
 
-            result = re.split(r"(%s)" % "|".join(OPERATORS.keys()), _filter)
+            # NOTE: Need to look for "<=" before "<" to avoid splitting x<=6 into (x, <, =6)
+            operator_keys = sorted(OPERATORS.keys(), reverse=True)
+            result = re.split(r"(%s)" % "|".join(operator_keys), _filter)
             if len(result) != 3:
                 raise Exception("Filter '%s' is not a valid filter specification.\n\n A valid filter looks like %s" % (
                     result[0],
