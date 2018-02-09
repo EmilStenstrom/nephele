@@ -36,6 +36,8 @@ class Provider(MoviedataProvider):
         if "rating" not in data:
             return ""
 
+        rating = data["rating"]
+        rating = rating.replace(",", ".")
         return re.sub(r"[^\d\.]", "", data["rating"])
 
     def get_data_mapping(self):
@@ -54,6 +56,5 @@ class Provider(MoviedataProvider):
             "metacritic_rating": "metascore",
             "imdb_url": "urlIMDB",
             "imdb_poster": "urlPoster",
-            "imdb_rating": "rating",
-            "imdb_rating_votes": self._get_clean_rating,
+            "imdb_rating": self._get_clean_rating,
         }
