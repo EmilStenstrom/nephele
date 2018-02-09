@@ -1,7 +1,6 @@
 import copy
 import json
 import requests
-from requests.utils import get_unicode_from_response
 import html5lib
 from application import APPLICATION as APP
 
