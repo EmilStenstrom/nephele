@@ -1,6 +1,5 @@
 import re
 from providers.moviedata.provider import MoviedataProvider
-from urllib import urlencode
 from application import ACCESS_KEYS, APPLICATION as APP
 
 IDENTIFIER = "MyAPIfilms"
@@ -21,7 +20,7 @@ class Provider(MoviedataProvider):
         if IDENTIFIER in ACCESS_KEYS:
             parameters["token"] = ACCESS_KEYS[IDENTIFIER]["TOKEN"]
 
-        return "http://www.myapifilms.com/imdb/title?" + urlencode(parameters)
+        return "http://www.myapifilms.com/imdb/title?" + self.urlencode(parameters)
 
     def fetch_movie_data(self, movie):
         url = self.get_url(movie)

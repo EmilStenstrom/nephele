@@ -5,6 +5,12 @@ from requests.utils import get_unicode_from_response
 from lxml import html as lxml_html
 from application import APPLICATION as APP
 
+# Be compatible with python 2 and 3
+try:
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import urlencode
+
 class BaseProvider(object):
     # ==== HELPER METHODS ====
     def parse_html(self, url, css_selector, timeout=60, cache=True):
@@ -35,6 +41,9 @@ class BaseProvider(object):
         data = json.loads(data)
         data = self.traverse_json(data, path)
         return data
+
+    def urlencode(self, data):
+        return urlencode(data)
 
     # ==== PRIVATE METHODS ====
     def _http_get(self, url, timeout=60, cache=True):

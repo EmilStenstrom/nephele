@@ -1,7 +1,6 @@
 from time import sleep
 from providers.popularity.provider import PopularityProvider
 from utils.torrent_util import torrent_to_movie, remove_bad_torrent_matches
-from urllib import urlencode
 
 IDENTIFIER = "rarbg"
 
@@ -20,7 +19,7 @@ class Provider(PopularityProvider):
             "limit": 100,
         }
 
-        url = base + urlencode(params)
+        url = base + self.urlencode(params)
         data_movies = self.parse_json(url, cache=False)
 
         tries = 1

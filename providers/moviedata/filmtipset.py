@@ -1,5 +1,4 @@
 from providers.moviedata.provider import MoviedataProvider
-from urllib import urlencode
 from application import ACCESS_KEYS, APPLICATION as APP
 
 IDENTIFIER = "Filmtipset"
@@ -13,7 +12,7 @@ class Provider(MoviedataProvider):
             "accesskey": ACCESS_KEYS[IDENTIFIER]["ACCESS_KEY"],
             "usernr": ACCESS_KEYS[IDENTIFIER]["USER_KEY"],
         }
-        return "http://www.filmtipset.se/api/api.cgi?" + urlencode(options)
+        return "http://www.filmtipset.se/api/api.cgi?" + self.urlencode(options)
 
     def fetch_movie_data(self, movie):
         url = self.get_url(movie)
