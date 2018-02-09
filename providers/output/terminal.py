@@ -3,6 +3,7 @@ import operator
 import re
 import textwrap
 from providers.output.provider import OutputProvider
+from decimal import Decimal
 
 IDENTIFIER = "Terminal"
 
@@ -10,8 +11,16 @@ class Provider(OutputProvider):
     def process_data(self, movie_data, filters):
         movie_data = self.apply_filters(movie_data, filters)
         movie_data = filter(lambda data: data.get("filmtipset_my_grade_type", "none") != "seen", movie_data)
-        movie_data = sorted(movie_data, key=lambda data: (data.get("filmtipset_my_grade", 0), data.get("imdb_rating", 0)), reverse=True)
+        movie_data = sorted(movie_data, key=Provider._get_sort_key, reverse=True)
         return movie_data
+
+    @staticmethod
+    def _get_sort_key(data):
+        # NOTE: filmtipset_my_grade and imdb_rating are stored as strings as JSON has no decimal impl.
+        return (
+            Decimal(data.get("filmtipset_my_grade", "0") or "0"),
+            Decimal(data.get("imdb_rating", "0") or "0")
+        )
 
     @staticmethod
     def _equals_or_contains(val1, val2):
