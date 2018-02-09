@@ -1,14 +1,11 @@
 import copy
 import json
-import requests
+from urllib.parse import urlencode
+
 import html5lib
+import requests
 from application import APPLICATION as APP
 
-# Be compatible with python 2 and 3
-try:
-    from urllib import urlencode
-except ImportError:
-    from urllib.parse import urlencode
 
 class BaseProvider(object):
     # ==== HELPER METHODS ====
