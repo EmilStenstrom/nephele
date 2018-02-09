@@ -49,4 +49,4 @@ class BaseProvider(object):
     def _http_get(self, url, timeout=60, cache=True):
         base = requests if not cache else APP.setting("WEBCACHE")
         response = base.get(url, timeout=timeout)
-        return get_unicode_from_response(response)
+        return response.text
