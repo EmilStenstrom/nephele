@@ -36,9 +36,7 @@ class Provider(MoviedataProvider):
         if "rating" not in data:
             return ""
 
-        rating = data["rating"]
-        rating = rating.replace(",", ".")
-        return re.sub(r"[^\d\.]", "", data["rating"])
+        return re.sub(r"[^\d\.]", "", data["rating"].replace(",", "."))
 
     def get_data_mapping(self):
         return {
