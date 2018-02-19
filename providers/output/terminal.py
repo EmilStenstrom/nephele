@@ -11,8 +11,25 @@ class Provider(OutputProvider):
     def process_data(self, movie_data, filters):
         movie_data = self.apply_filters(movie_data, filters)
         movie_data = filter(lambda data: data.get("filmtipset_my_grade_type", "none") != "seen", movie_data)
-        movie_data = sorted(movie_data, key=Provider._get_sort_key, reverse=True)
+        movie_data = sorted(movie_data, key=self._get_ratings, reverse=True)
         return movie_data
+
+    def _get_ratings(self, data):
+        filmtipset_my_grade = self._get_filmtipset_my_grade(data)
+        imdb_rating = data.get("imdb_rating", 0)
+        return (str(filmtipset_my_grade), str(imdb_rating))
+
+    def _get_filmtipset_my_grade(self, data):
+        rating = 0
+        if "filmtipset_my_grade_type" not in data:
+            return rating
+
+        if data["filmtipset_my_grade_type"] != "none" and data["filmtipset_my_grade"]:
+            rating = data["filmtipset_my_grade"]
+        elif data["filmtipset_avg_grade"]:
+            rating = data["filmtipset_avg_grade"]
+
+        return rating
 
     @staticmethod
     def _get_sort_key(data):

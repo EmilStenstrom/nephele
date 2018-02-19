@@ -4,9 +4,9 @@ from difflib import SequenceMatcher
 # Cut out the movie name from a torrent name
 def torrent_to_movie(name):
     # Strings that mark the end of a movie name, and start of meta data
-    ends = ["1280p", "1080p", "720p", "r6", "bluray", "bdrip", "brrip", "blu-ray", "blu", "bd", "hd", "hc", "hdtv", "hdcam", "hdscr", "hdtc", "korsub", "extended", "uncut", "unrated", "repack", "r3", "swesub", "ac3", "xvid", "hdrip", "dvdscr", "rc", "dvdrip", "dvdr", "webrip", "rerip", "proper", "hq", "directors", "retail", "boxset", "imax", "x264", "tc", "bdrip720p", "bdrip1080p", "edition", "limited", "french", "swedish", "hindi", "italian", "malayalam", "kor", "nlsubs", "pal", "mkv", "avi", "iso", "mp4", "mpeg", "mov"]
+    ends = ["1280p", "1080p", "720p", "r6", "bluray", "bdrip", "brrip", "blu-ray", "blu", "bd", "hd", "hc", "hdtv", "hdcam", "hdscr", "hdtc", "korsub", "extended", "uncut", "unrated", "repack", "r3", "swesub", "ac3", "xvid", "hdrip", "dvdscr", "rc", "dvdrip", "dvdr", "webrip", "rerip", "proper", "hq", "directors", "retail", "boxset", "imax", "x264", "tc", "bdrip720p", "bdrip1080p", "edition", "limited", "french", "swedish", "hindi", "italian", "malayalam", "kor", "eng", "nlsubs", "pal", "mkv", "avi", "iso", "mp4", "mpeg", "mov"]
     ends_i = ["iNTERNAL", "CUSTOM", "TS", "MULTi", "EC"]  # Case sensitive strings
-    ends_double = ["dir cut", "ext cut", "web dl", "dual audio", "extended cut"]
+    ends_double = ["dir cut", "ext cut", "web dl", "dual audio", "extended cut", "final cut"]
     ends_triple = ["the final cut"]
 
     # Remove everything after three words followed by a parentesis with a year

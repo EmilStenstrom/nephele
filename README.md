@@ -1,13 +1,13 @@
 # What is Nephele?
 
-Nephele is a Python script that lets you cross reference movie data from several sources. It currently supports **Torrentz**, **IMDB**, **Filmtipset** (Swedish rating site), **Kickass Torrentz**, and **YIFY Movies**. It's easy to add your own providers for new sources if you want (pull requests gladly accepted!).
+Nephele is a Python script that lets you cross reference movie data from several sources. It currently supports **IMDB**, **Filmtipset** (Swedish rating site), **The Piratebay**, **YIFY Movies**, **RARBG** and **Kickass Torrents**. It's easy to add your own providers for new sources if you want (pull requests gladly accepted!).
 
 ## How do I run it?
 
 ```bash
 python nephele.py get_popular
 ```
-Get the most popular movies from Torrentz, cross-reference that data with data from Filmtipset and IMDB, and finally output the data to the terminal sorted by your Filmtipset grade.
+Get the most popular movies from your favourity torrent site (by efault The Piratebay), cross-reference that data with data from Filmtipset and IMDB, and finally output the data to the terminal sorted by your Filmtipset grade.
 
 ```bash
 python nephele.py get_grades "/path/to/your/directory"
@@ -72,11 +72,11 @@ If you want to change things, this is what the different settings do:
 
 `DATABASE`: The filename of where the movie database will be stored. By default "db.json".
 
-`POPULARITY_PROVIDER`: The service that will be used to fetch the currently popular movies. Default is Torrentz.
+`POPULARITY_PROVIDER`: The service that will be used to fetch the currently popular movies. Default is The Piratebay.
 
 `MOVIEDATA_PROVIDERS`: A list of services where data about a particular movie will be found. Default is Filmtipset and IMDB.
 
-`OUTPUT_PROVIDER`: How you want to output your data. By default it uses Filmtipset. It removes all movies you've seen, sorts it by the guessed grade and outputs it to the terminal.
+`OUTPUT_PROVIDER`: How you want to output your data. By default it uses Filmtipset. It removes all movies you've seen from the output (you probably don't want to see them again...), sorts it by the guessed grade and outputs it to the terminal.
 
 ### Set up an `access_key.py` file for Filmtipset
 

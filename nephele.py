@@ -1,3 +1,5 @@
+#!/usr/bin/env python -u
+
 """
 
 Nephele - Finding movies to watch on the internet is easy,
