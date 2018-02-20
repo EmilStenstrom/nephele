@@ -1,6 +1,6 @@
 cssselect2
+docopt
+html5lib
 requests
 requests-cache
 tinydb
-html5lib
-docopt
