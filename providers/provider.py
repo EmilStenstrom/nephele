@@ -5,15 +5,16 @@ from urllib.parse import urlencode
 import html5lib
 import requests
 from application import APPLICATION as APP
+from cssselect2 import ElementWrapper
 
 
 class BaseProvider(object):
     # ==== HELPER METHODS ====
-    def parse_html(self, url, css_selector, timeout=60, cache=True):
+    def parse_html(self, url, css_selector, timeout=10, cache=True):
         html = self._http_get(url, timeout=timeout, cache=cache)
         document = html5lib.parse(html)
-        results = document.cssselect(css_selector)
-        data = [result.text_content() for result in results]
+        results = ElementWrapper.from_html_root(document).query_all(css_selector)
+        data = [result.etree_element.text for result in results]
         return data
 
     def traverse_json(self, data, path):

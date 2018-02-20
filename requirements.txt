@@ -6,13 +6,14 @@
 #
 certifi==2018.1.18        # via requests
 chardet==3.0.4            # via requests
-cssselect==1.0.3
+cssselect2==0.2.1
 docopt==0.6.2
 html5lib==1.0.1
 idna==2.6                 # via requests
 requests-cache==0.4.13
 requests==2.18.4
 six==1.11.0               # via html5lib
+tinycss2==0.6.1           # via cssselect2
 tinydb==3.7.0
 urllib3==1.22             # via requests
-webencodings==0.5.1       # via html5lib
+webencodings==0.5.1       # via html5lib, tinycss2
