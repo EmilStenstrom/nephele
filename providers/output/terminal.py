@@ -109,8 +109,8 @@ class Provider(OutputProvider):
             ))
 
             print("  [Genre: %s, Country: %s, Year: %s]" % (
-                ", ".join(data.get("genre", "-")),
-                data.get("country", "-"),
+                ", ".join(data.get("genre", ["-"])),
+                ", ".join(data.get("country", ["-"])),
                 data.get("year", "-"),
             ))
 
