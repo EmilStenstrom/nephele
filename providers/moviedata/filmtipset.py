@@ -1,9 +1,5 @@
 from providers.moviedata.provider import MoviedataProvider
 from application import ACCESS_KEYS, APPLICATION as APP
-try:
-    from urllib import urlencode  # Python 2.X
-except ImportError:
-    from urllib.parse import urlencode  # Python 3+
 
 IDENTIFIER = "Filmtipset"
 

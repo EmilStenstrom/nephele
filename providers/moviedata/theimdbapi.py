@@ -1,10 +1,6 @@
 import re
 from providers.moviedata.provider import MoviedataProvider
 from application import ACCESS_KEYS, APPLICATION as APP
-try:
-    from urllib import urlencode  # Python 2.X
-except ImportError:
-    from urllib.parse import urlencode  # Python 3+
 
 IDENTIFIER = "theimdbapi"
 
@@ -16,7 +12,7 @@ class Provider(MoviedataProvider):
         if "year" in movie and movie["year"]:
             parameters["year"] = movie["year"]
 
-        return "http://www.theimdbapi.org/api/find/movie?" + urlencode(parameters)
+        return "http://www.theimdbapi.org/api/find/movie?" + self.urlencode(parameters)
 
     def fetch_movie_data(self, movie):
         url = self.get_url(movie)
