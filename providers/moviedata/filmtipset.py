@@ -40,12 +40,15 @@ class Provider(MoviedataProvider):
 
         return self.traverse_json(data, path="0.movie")
 
+    def _get_country_list(self, data):
+        return [country.strip() for country in data["country"].split(",")]
+
     def get_data_mapping(self):
         return {
             "id": lambda data: "tt" + data["imdb"],
             "title": lambda data: data["orgname"].strip(),
             "title_swe": lambda data: data["name"].strip(),
-            "country": "country",
+            "country": self._get_country_list,
             "director": "director",
             "year": "year",
             "filmtipset_my_grade": "grade.value",
