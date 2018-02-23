@@ -1,6 +1,8 @@
 from importlib import import_module
-from utils.torrent_util import torrent_to_movie
+
 from application import APPLICATION as APP
+from utils.torrent_util import torrent_to_movie
+
 
 def clear_cache(name):
     APP.debug("Clearing \"%s\" from movie db..." % name)

@@ -1,8 +1,10 @@
 import os
 from importlib import import_module
+
 from application import APPLICATION as APP
-from utils.torrent_util import torrent_to_movie, remove_bad_torrent_matches
 from utils.movie_util import update_moviedata
+from utils.torrent_util import remove_bad_torrent_matches, torrent_to_movie
+
 
 def is_proper_movie_file(filename, is_directory):
     FILE_ENDINGS = [".mkv", ".mp4", ".avi", ".iso", ".mov", ".mpeg"]

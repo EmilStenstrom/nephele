@@ -1,6 +1,7 @@
 import re
 from difflib import SequenceMatcher
 
+
 # Cut out the movie name from a torrent name
 def torrent_to_movie(name):
     # Strings that mark the end of a movie name, and start of meta data

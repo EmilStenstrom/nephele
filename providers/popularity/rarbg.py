@@ -1,6 +1,7 @@
 from time import sleep
+
 from providers.popularity.provider import PopularityProvider
-from utils.torrent_util import torrent_to_movie, remove_bad_torrent_matches
+from utils.torrent_util import remove_bad_torrent_matches, torrent_to_movie
 
 IDENTIFIER = "rarbg"
 

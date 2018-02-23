@@ -4,8 +4,9 @@ from urllib.parse import urlencode
 
 import html5lib
 import requests
-from application import APPLICATION as APP
 from cssselect2 import ElementWrapper
+
+from application import APPLICATION as APP
 
 
 class BaseProvider(object):

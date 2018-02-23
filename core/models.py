@@ -1,5 +1,7 @@
 from tinydb import where
+
 from utils.torrent_util import torrent_to_movie
+
 
 class Model(object):
     def __init__(self, database, table):

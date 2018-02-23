@@ -1,10 +1,13 @@
 import sys
-import html5lib
-from movie_util import filenames_to_search_strings, separate_movies_from_bundles, print_movies
-from http_util import cached_request
-from filmtipset_util import get_grades
 
+import html5lib
 from requests.packages import urllib3
+
+from filmtipset_util import get_grades
+from http_util import cached_request
+from movie_util import (filenames_to_search_strings, print_movies,
+                        separate_movies_from_bundles)
+
 urllib3.disable_warnings()
 
 # Get list of all Highres movies, popular right now, from piratebay

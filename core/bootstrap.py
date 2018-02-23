@@ -1,4 +1,5 @@
 from tinydb import TinyDB
+
 from core.models import Movie
 
 TABLE_POPULAR = "popular"

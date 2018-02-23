@@ -1,5 +1,5 @@
-from providers.moviedata.provider import MoviedataProvider
 from application import APPLICATION as APP
+from providers.moviedata.provider import MoviedataProvider
 
 IDENTIFIER = "theimdbapi"
 

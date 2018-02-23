@@ -1,5 +1,6 @@
 from importlib import import_module
 
+
 def update_moviedata(movies, APP):
     for movie in movies:
         for provider_path in APP.setting("MOVIEDATA_PROVIDERS"):

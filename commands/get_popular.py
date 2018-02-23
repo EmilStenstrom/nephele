@@ -1,6 +1,8 @@
 from importlib import import_module
+
 from application import APPLICATION as APP
 from utils.movie_util import update_moviedata
+
 
 def get_popular():
     APP.debug("Fetching popular movies...")

@@ -1,8 +1,9 @@
 import operator
 import re
 import textwrap
-from providers.output.provider import OutputProvider
 from decimal import Decimal
+
+from providers.output.provider import OutputProvider
 
 IDENTIFIER = "Terminal"
 
