@@ -1,6 +1,5 @@
-import re
 from providers.moviedata.provider import MoviedataProvider
-from application import ACCESS_KEYS, APPLICATION as APP
+from application import APPLICATION as APP
 
 IDENTIFIER = "theimdbapi"
 

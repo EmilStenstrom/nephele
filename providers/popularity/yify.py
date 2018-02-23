@@ -1,5 +1,4 @@
 from providers.popularity.provider import PopularityProvider
-from utils.torrent_util import torrent_to_movie, remove_bad_torrent_matches
 
 IDENTIFIER = "YIFY"
 
