@@ -1,4 +1,3 @@
-from __future__ import print_function
 from providers.provider import BaseProvider
 
 # Subclasses implement a way to get a list of popular movies in

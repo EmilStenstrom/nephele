@@ -1,4 +1,3 @@
-from __future__ import print_function
 import sys
 import html5lib
 from movie_util import filenames_to_search_strings, separate_movies_from_bundles, print_movies

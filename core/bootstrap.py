@@ -1,4 +1,3 @@
-from __future__ import print_function
 from tinydb import TinyDB
 from core.models import Movie
 

@@ -1,4 +1,3 @@
-from __future__ import print_function
 from providers.provider import BaseProvider
 
 # Subclasses implement a way to get movie data for from a search string
