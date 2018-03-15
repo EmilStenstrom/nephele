@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 from difflib import SequenceMatcher
 
 
@@ -29,13 +30,12 @@ def torrent_to_movie(name):
     # Remove unnessesary whitespace
     name = name.strip()
 
-    # Split name and year and return both
-    matches = re.split(r" (?=\d{4}$)", name)
-    if len(matches) == 2:
-        name, year = matches
-    else:
-        name = matches[0]
-        year = None
+    # If name ends with a movie release year, return year separately
+    year = None
+    match = re.match(r"^(?P<name>.+) (?P<year>\d{4})$", name)
+    if match and 1900 < int(match.group("year")) < datetime.now().year:
+        name = match.group("name")
+        year = match.group("year")
 
     return {
         "name": name,
