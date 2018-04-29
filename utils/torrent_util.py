@@ -33,7 +33,7 @@ def torrent_to_movie(name):
     # If name ends with a movie release year, return year separately
     year = None
     match = re.match(r"^(?P<name>.+) (?P<year>\d{4})$", name)
-    if match and 1900 < int(match.group("year")) < datetime.now().year:
+    if match and 1900 < int(match.group("year")) <= datetime.now().year:
         name = match.group("name")
         year = match.group("year")
 
