@@ -42,7 +42,7 @@ class Provider(MoviedataProvider):
 
     def get_data_mapping(self):
         return {
-            "id": lambda data: "tt" + data["imdb"],
+            "id": lambda data: "tt" + data["imdb"] if data["imdb"] else "",
             "title": lambda data: data["orgname"].strip(),
             "title_swe": lambda data: data["name"].strip(),
             "country": self._get_country_list,
