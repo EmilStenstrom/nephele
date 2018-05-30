@@ -2,6 +2,10 @@ import re
 from datetime import datetime
 from difflib import SequenceMatcher
 
+TV_REGEX = re.compile(r"s\d\de\d\d", re.IGNORECASE)
+RELEASE_YEAR_REGEX = re.compile(r"^((?:.*[ \.]){3,}\(\d\d\d\d\)).+")
+NON_ALPHA_REGEX = re.compile(r"[^\w'\:]+", flags=re.UNICODE)
+SPLIT_NAME_AND_YEAR_REGEX = re.compile(r"^(?P<name>.+) (?P<year>\d{4})$")
 
 # Cut out the movie name from a torrent name
 def torrent_to_movie(name):
@@ -12,10 +16,10 @@ def torrent_to_movie(name):
     ends_triple = ["the final cut"]
 
     # Remove everything after three words followed by a parentesis with a year
-    name = re.sub(r"^((?:.*[ \.]){3,}\(\d\d\d\d\)).+", r"\1", name)
+    name = re.sub(RELEASE_YEAR_REGEX, r"\1", name)
 
     # Remove all non-alpha characters
-    raw_words = re.split(r"[^\w'\:]+", name, flags=re.UNICODE)
+    raw_words = re.split(NON_ALPHA_REGEX, name)
 
     # Loop over all words. As soon as a ending is found, cut to there
     words = raw_words
@@ -32,7 +36,7 @@ def torrent_to_movie(name):
 
     # If name ends with a movie release year, return year separately
     year = None
-    match = re.match(r"^(?P<name>.+) (?P<year>\d{4})$", name)
+    match = re.match(SPLIT_NAME_AND_YEAR_REGEX, name)
     if match and 1900 < int(match.group("year")) <= datetime.now().year:
         name = match.group("name")
         year = match.group("year")
@@ -44,11 +48,10 @@ def torrent_to_movie(name):
     }
 
 def is_tv(words):
-    tv_regex = r"s\d\de\d\d"
     tokens = [word.lower() for word in words]
 
     for word in tokens:
-        if re.search(tv_regex, word, re.IGNORECASE):
+        if re.search(TV_REGEX, word):
             return True
 
     if "hdtv" in tokens:
