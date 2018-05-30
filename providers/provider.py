@@ -10,6 +10,9 @@ from application import APPLICATION as APP
 
 
 class BaseProvider(object):
+    def __init__(self):
+        self.session = requests.Session()
+
     # ==== HELPER METHODS ====
     def parse_html(self, url, css_selector, timeout=10, cache=True):
         html = self._http_get(url, timeout=timeout, cache=cache)
@@ -45,6 +48,13 @@ class BaseProvider(object):
 
     # ==== PRIVATE METHODS ====
     def _http_get(self, url, timeout=60, cache=True):
-        base = requests if not cache else APP.setting("WEBCACHE")
+        base = self.session if not cache else APP.setting("WEBCACHE")
         response = base.get(url, timeout=timeout)
+        # from pprint import pprint
+        # print("REQUEST", url)
+        # pprint(base.headers)
+        # print("-" * 80)
+        # print("RESPONSE", response.status_code, repr(response.text))
+        # pprint(response.headers)
+        # print("=" * 80)
         return response.text

@@ -10,7 +10,12 @@ IDENTIFIER = "rarbg"
 class Provider(PopularityProvider):
     def get_popular(self):
         base = "https://torrentapi.org/pubapi_v2.php?"
-        data_token = self.parse_json(base + "get_token=get_token", cache=False)
+
+        token_params = {
+            "get_token": "get_token",
+        }
+        url_token = base + self.urlencode(token_params)
+        data_token = self.parse_json(url_token, cache=False)
 
         params = {
             "token": data_token["token"],
