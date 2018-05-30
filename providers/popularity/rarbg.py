@@ -18,6 +18,8 @@ class Provider(PopularityProvider):
         url_token = base + self.urlencode(token_params)
         data_token = self.parse_json(url_token, cache=False)
 
+        sleep(2)
+
         params = {
             "token": data_token["token"],
             "mode": "list",
@@ -26,14 +28,13 @@ class Provider(PopularityProvider):
             "limit": 100,
             "app_id": "nephele",
         }
-
         url = base + self.urlencode(params)
         data_movies = self.parse_json(url, cache=False)
 
         tries = 1
         while "error" in data_movies and tries < 10:
             print("Error returned, retrying in 1 sec")
-            sleep(1)
+            sleep(2)
             data_movies = self.parse_json(url, cache=False)
             tries += 1
 
