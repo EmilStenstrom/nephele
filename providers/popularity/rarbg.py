@@ -13,6 +13,7 @@ class Provider(PopularityProvider):
 
         token_params = {
             "get_token": "get_token",
+            "app_id": "nephele",
         }
         url_token = base + self.urlencode(token_params)
         data_token = self.parse_json(url_token, cache=False)
@@ -23,6 +24,7 @@ class Provider(PopularityProvider):
             "sort": "seeders",
             "category": "14;48;17;44;45;47;42;46",
             "limit": 100,
+            "app_id": "nephele",
         }
 
         url = base + self.urlencode(params)
