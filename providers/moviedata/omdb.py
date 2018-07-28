@@ -8,8 +8,10 @@ IDENTIFIER = "OMDb"
 
 class Provider(MoviedataProvider):
     def __init__(self):
-        if IDENTIFIER not in ACCESS_KEYS or not ACCESS_KEYS[IDENTIFIER]:
-            raise SystemExit("APIKEY for {} not found in access_keys.py.".format(IDENTIFIER))
+        try:
+            assert ACCESS_KEYS[IDENTIFIER]["APIKEY"], "APIKEY for {} not found in access_keys.py.".format(IDENTIFIER)
+        except KeyError:
+            assert False, "APIKEY for {} not found in access_keys.py.".format(IDENTIFIER)
 
         super(Provider, self).__init__()
 
