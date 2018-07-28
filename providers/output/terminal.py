@@ -83,8 +83,9 @@ class Provider(OutputProvider):
             field, op, value = result
 
             if field not in filtered_data[0]:
-                raise Exception("Field '%s' is not a valid field name. \n\nValid field names are: %s" % (
+                raise Exception("Field '%s' is not a valid field name for '%s'. \n\nValid field names are: %s" % (
                     field,
+                    filtered_data[0]["title"],
                     ", ".join(filtered_data[0].keys()),
                 ))
 
