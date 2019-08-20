@@ -15,5 +15,5 @@ requests==2.21.0
 six==1.12.0               # via html5lib
 tinycss2==0.6.1           # via cssselect2
 tinydb==3.12.2
-urllib3==1.24.1           # via requests
+urllib3==1.24.2           # via requests
 webencodings==0.5.1       # via html5lib, tinycss2
