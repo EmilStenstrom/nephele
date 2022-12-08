@@ -4,16 +4,33 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-certifi==2018.11.29       # via requests
-chardet==3.0.4            # via requests
+certifi==2022.12.7
+    # via requests
+chardet==3.0.4
+    # via requests
 cssselect2==0.2.1
+    # via -r requirements.in
 docopt==0.6.2
+    # via -r requirements.in
 html5lib==1.0.1
-idna==2.8                 # via requests
-requests-cache==0.4.13
+    # via -r requirements.in
+idna==2.8
+    # via requests
 requests==2.21.0
-six==1.12.0               # via html5lib
-tinycss2==0.6.1           # via cssselect2
+    # via
+    #   -r requirements.in
+    #   requests-cache
+requests-cache==0.4.13
+    # via -r requirements.in
+six==1.12.0
+    # via html5lib
+tinycss2==0.6.1
+    # via cssselect2
 tinydb==3.12.2
-urllib3==1.24.2           # via requests
-webencodings==0.5.1       # via html5lib, tinycss2
+    # via -r requirements.in
+urllib3==1.24.2
+    # via requests
+webencodings==0.5.1
+    # via
+    #   html5lib
+    #   tinycss2
