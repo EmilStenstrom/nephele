@@ -28,7 +28,7 @@ tinycss2==0.6.1
     # via cssselect2
 tinydb==3.12.2
     # via -r requirements.in
-urllib3==1.26.5
+urllib3==1.26.17
     # via requests
 webencodings==0.5.1
     # via
