@@ -14,7 +14,7 @@ docopt==0.6.2
     # via -r requirements.in
 html5lib==1.0.1
     # via -r requirements.in
-idna==2.8
+idna==3.7
     # via requests
 requests==2.31.0
     # via
